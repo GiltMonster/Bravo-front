@@ -1,36 +1,23 @@
-@import '../../../global.scss';
+ion-header {
+  ion-toolbar {
+    --padding-top: 30px;
+    --padding-bottom: 30px;
 
-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-  border-width: 0 0 1px 0;
-  border-style: solid;
-  background-color: $fundo-100;
-  border-color: $fundo-300;
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 50px;
 
+      img {
+        width: 200px;
+        height: auto;
+      }
 
-  img{
-    width: 200px;
-    height: auto;
-  }
-
-  ul{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
-    ion-button{
-      margin: 0 20px;
-      a{
-        text-decoration: none;
+      .buttons-container {
+        display: flex;
+        gap: 10px;
       }
     }
-
   }
-
 }
