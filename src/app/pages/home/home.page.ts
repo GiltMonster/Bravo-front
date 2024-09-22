@@ -18,13 +18,9 @@ export class HomePage {
 
   constructor(
     platformService: PlatformService,
-    router: Router,
   ) {
 
     this.isMobile = platformService.isMobile();
 
-    if (this.isMobile) {
-      router.navigate(['/mobile/tabs/home']);
-    }
    }
 }
