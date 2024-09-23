@@ -18,8 +18,9 @@
       </ion-item>
     </ion-list>
     }@else {
-    <ion-select interface="popover" placeholder="Selecione uma categoria" shape="round" color="primary"
-      (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()">
+    <ion-select interface="popover" placeholder="Selecione uma categoria" shape="round" [(ngModel)]="categoriesSelected"
+    (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()"
+    multiple color="primary">
       @for(categorie of categories; track categorie.id){
       <ion-select-option [value]="categorie.name">{{categorie.name}}</ion-select-option>
       }
@@ -34,7 +35,7 @@
   }
 
   @if(btnUpdate && categoriesSelected.length > 0){
-      <ion-chip outline color="success" (click)="updateCategori()">Atualizar</ion-chip>
+      <ion-chip outline color="success" (click)="updateCategory()">Atualizar</ion-chip>
   }
 
   </div>

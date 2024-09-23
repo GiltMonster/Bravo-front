@@ -14,10 +14,7 @@ import { PlatformService } from 'src/app/services/platform.service';
 export class PesquisaComponent {
 
   isMobile: boolean;
-  isValido: boolean = false;
   btnUpdate: boolean = false;
-
-
   styleSearchbarContainer: string = "searchbar-content";
 
   categories: Categorie[] = [
@@ -245,19 +242,17 @@ export class PesquisaComponent {
     }
   }
 
-
   removeCategory(categorie: string) {
     this.categoriesSelected = this.categoriesSelected.filter(category => category !== categorie);
+    this.btnUpdate = true;
+    if (this.categoriesSelected.length === 0) this.updateCategory();
+
   }
 
   handleChange({ value }: any) {
-    if (this.isMobile) {
       this.categoriesSelected = value; // Atualiza a lista de categorias selecionadas
       this.btnUpdate = true;
 
-    } else {
-      this.selectCategory(value);
-    }
   }
 
   selectCategory(categorie: string) {
@@ -277,7 +272,7 @@ export class PesquisaComponent {
     console.log('ionDismiss fired');
   }
 
-  updateCategori() {
+  updateCategory() {
     this.btnUpdate = false;
     throw new Error('Method not implemented.');
   }
