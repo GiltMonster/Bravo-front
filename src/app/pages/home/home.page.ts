@@ -3,14 +3,14 @@ import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/stan
 import { ExploreContainerComponent } from '../../explore-container/explore-container.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { PlatformService } from 'src/app/services/platform.service';
-import { Router } from '@angular/router';
+import { PesquisaComponent } from "../../components/pesquisa/pesquisa.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, HeaderComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, HeaderComponent, PesquisaComponent],
 })
 export class HomePage {
 

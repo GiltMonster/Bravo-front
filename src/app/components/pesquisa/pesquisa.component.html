@@ -1,0 +1,43 @@
+<div [class]="styleSearchbarContainer">
+
+  <div class="searchbar-container">
+    <!-- <ion-searchbar show-clear-button="focus" placeholder="Pesquisar" class="custom"></ion-searchbar> -->
+    <ion-input label="Pesquisa" label-placement="floating" fill="outline"
+      placeholder="Digite o nome de um carro"></ion-input>
+
+    @if(isMobile){
+    <ion-list>
+      <ion-item lines="full">
+        <ion-select class="mobile" placeholder="Categorias" [(ngModel)]="categoriesSelected"
+          (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()"
+          multiple color="primary">
+          @for(categorie of categories; track categorie.id){
+          <ion-select-option [value]="categorie.name">{{categorie.name}}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    }@else {
+    <ion-select interface="popover" placeholder="Selecione uma categoria" shape="round" color="primary"
+      (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()">
+      @for(categorie of categories; track categorie.id){
+      <ion-select-option [value]="categorie.name">{{categorie.name}}</ion-select-option>
+      }
+    </ion-select>
+    }
+
+  </div>
+
+  <div class="chip-container">
+    @for(categorie of categoriesSelected; track categorie){
+    <ion-chip outline color="primary" (click)="removeCategory(categorie)">{{categorie}}</ion-chip>
+  }
+
+  @if(btnUpdate && categoriesSelected.length > 0){
+      <ion-chip outline color="success" (click)="updateCategori()">Atualizar</ion-chip>
+  }
+
+  </div>
+
+
+</div>
