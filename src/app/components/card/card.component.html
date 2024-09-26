@@ -1,3 +1,47 @@
-<p>
-  card works!
-</p>
+@if(isMobile){
+@for(categoria of categorias; track categoria.id) {
+<ion-label class="ion-padding">
+  <h1>{{categoria.name}}</h1>
+</ion-label>
+
+<div class="cards-list-mobile" scrollX="true">
+  @for(produto of produtos; track produto.id){
+
+  <div class="card">
+    <ion-card>
+      <img alt="img is {{produto.name}}" [src]="produto.imagem_produto[0].imagem_url" />
+      <ion-card-header>
+        <ion-card-title>{{produto.name}}</ion-card-title>
+        <ion-card-subtitle>{{produto.produto_desc}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+  }
+</div>
+}
+
+}@else {
+
+@for(categoria of categorias; track categoria.id) {
+
+<ion-label class="ion-padding">
+  <h1 class="web-title">{{categoria.name}}</h1>
+</ion-label>
+
+<div class="cards-list-web web-container">
+
+  @for(produto of produtos; track produto.id){
+
+  <ion-card class="card">
+    <img alt="img is {{produto.name}}" [src]="produto.imagem_produto[0].imagem_url" />
+    <ion-card-header>
+      <ion-card-title>{{produto.name}}</ion-card-title>
+      <ion-card-subtitle>{{produto.produto_desc}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  }
+
+</div>
+}
+}

@@ -1,14 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PlatformService } from 'src/app/services/platform.service';
+import { IonCard, IonIcon, IonLabel, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton } from "@ionic/angular/standalone";
+import Category from 'src/app/interfaces/Categories';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+  imports: [IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonLabel, IonIcon, IonCard],
+  standalone: true,
 })
-export class CardComponent  implements OnInit {
+export class CardComponent {
 
-  constructor() { }
+  @Input() categorias = [{
+    id: '',
+    active: false,
+    name: '',
+    description: '',
+    image: ''
+  }];
 
-  ngOnInit() {}
+  @Input() produtos = [{
+    id: 0,
+    name: '',
+    produto_desc: '',
+    price: 0,
+    produto_desconto: 0,
+    imagem_produto: [{
+      imagem_id: 0,
+      imagem_ordem: 0,
+      imagem_url: ''
+    },]
+  }]
+
+  @Input() typeCard?: string;
+
+  isMobile: boolean;
+
+  constructor(
+    platformService: PlatformService
+  ) {
+    this.isMobile = platformService.isMobile();
+  }
+
 
 }
