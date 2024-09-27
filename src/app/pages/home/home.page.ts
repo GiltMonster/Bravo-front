@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../../explore-container/explore-container.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
@@ -7,6 +7,7 @@ import { PesquisaComponent } from "../../components/pesquisa/pesquisa.component"
 import { CardComponent } from "../../components/card/card.component";
 import Category from 'src/app/interfaces/Categories';
 import Produto from 'src/app/interfaces/Product';
+import { HomeService } from 'src/app/services/home/home.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import Produto from 'src/app/interfaces/Product';
   standalone: true,
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, HeaderComponent, PesquisaComponent, CardComponent],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   isMobile: boolean;
 
@@ -309,8 +310,22 @@ export class HomePage {
 
 
   constructor(
-    platformService: PlatformService,
+    private homeService: HomeService,
+    platformService: PlatformService
   ) {
     this.isMobile = platformService.isMobile();
   }
+
+  ngOnInit(): void {
+    this.sendHomeData();
+  }
+
+  sendHomeData() {
+    this.homeService.getHomeData().subscribe(((data) => {
+      console.log(data);
+    }));
+
+  }
+
+
 }
