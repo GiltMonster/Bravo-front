@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PlatformService } from 'src/app/services/platform.service';
 import { IonCard, IonIcon, IonLabel, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton } from "@ionic/angular/standalone";
 import Category from 'src/app/interfaces/Categories';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -38,9 +39,16 @@ export class CardComponent {
   isMobile: boolean;
 
   constructor(
-    platformService: PlatformService
+    platformService: PlatformService,
+    private router: Router
   ) {
     this.isMobile = platformService.isMobile();
+  }
+
+  goToDesc(id: number) {
+    this.router.navigate(['/desc/produto/', id]);
+
+
   }
 
 

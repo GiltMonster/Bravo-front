@@ -32,7 +32,7 @@
 
   @for(produto of produtos; track produto.id){
 
-  <ion-card class="card">
+  <ion-card class="card" button (click)="goToDesc(produto.id)">
     <img alt="img is {{produto.name}}" [src]="produto.imagem_produto[0].imagem_url" />
     <ion-card-header>
       <ion-card-title>{{produto.name}}</ion-card-title>
