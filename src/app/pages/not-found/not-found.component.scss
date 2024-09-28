@@ -1,0 +1,54 @@
+.containerNotFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: #f5f5f5;
+
+  .notFount {
+    display: flex;
+    align-items: last baseline;
+    gap: 10px;
+    font-size: 100px;
+    font-weight: 700;
+    color: #f44336;
+
+    h1{
+      font-size: 100px;
+      font-weight: 700;
+      color: #f44336;
+    }
+
+    h2{
+      font-size: 40px;
+      font-weight: 700;
+      color: #f44336;
+    }
+
+  }
+
+  p{
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .btn{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f44336;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+
+    &:hover{
+      background-color: #dd483e;
+      color: #fff;
+    }
+  }
+}
