@@ -18,11 +18,11 @@
   }
 
   <div class="searchbar-container">
-    <app-pesquisa></app-pesquisa>
+    <app-pesquisa [categories]="categoriesWithProducts"></app-pesquisa>
   </div>
 
 <div class="container">
-  <app-card [produtos]="produto" [categorias]="categories"></app-card>
+  <app-card [categories]="categoriesWithProducts"></app-card>
 </div>
 
 
