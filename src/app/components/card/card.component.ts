@@ -1,40 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PlatformService } from 'src/app/services/platform.service';
-import { IonCard, IonIcon, IonLabel, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton } from "@ionic/angular/standalone";
-import Category from 'src/app/interfaces/Categories';
+import { IonCard, IonIcon, IonLabel, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonCardContent } from "@ionic/angular/standalone";
+import Category from 'src/app/interfaces/Category';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
-  imports: [IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonLabel, IonIcon, IonCard],
+  imports: [IonCardContent, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonLabel, IonIcon, IonCard],
   standalone: true,
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
 
-  @Input() categorias = [{
-    id: '',
-    active: false,
-    name: '',
-    description: '',
-    image: ''
-  }];
-
-  @Input() produtos = [{
-    id: 0,
-    name: '',
-    produto_desc: '',
-    price: 0,
-    produto_desconto: 0,
-    imagem_produto: [{
-      imagem_id: 0,
-      imagem_ordem: 0,
-      imagem_url: ''
-    },]
-  }]
-
-  @Input() typeCard?: string;
+  @Input() categories: Category[] = [];
 
   isMobile: boolean;
 
@@ -45,10 +24,20 @@ export class CardComponent {
     this.isMobile = platformService.isMobile();
   }
 
+  ngOnInit(): void {
+    console.log(this.categories);
+  }
+
   goToDesc(id: number) {
-    this.router.navigate(['/desc/produto/', id]);
+    this.isMobile ? this.router.navigate(['/mobile/desc/produto/', id]) : this.router.navigate(['/desc/produto/', id]);
+  }
 
+  formatPrice(price: string) {
+    return parseFloat(price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
 
+  formatPromo(price: string, discount: string) {
+    return (parseFloat(price) - parseFloat(discount)).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
 

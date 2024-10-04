@@ -29,6 +29,10 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'desc/produto/:id',
+    loadComponent: () => import('../../pages/desc-produto/desc-produto.component').then((m) => m.DescProdutoComponent),
+  },
+  {
     path: '',
     redirectTo: '/tabs/home',
     pathMatch: 'full',

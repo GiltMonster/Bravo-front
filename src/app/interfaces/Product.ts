@@ -1,10 +1,13 @@
-import Img_produto from "./Img_produto";
+import Produto_imagem from "./Produto_imagem";
 
-export default interface Produto {
-  id: number;
-  name: string;
-  produto_desc: string;
-  price: number;
-  produto_desconto: number;
-  imagem_produto: Img_produto[];
+export default interface Product {
+  CATEGORIA_ID: number;
+  PRODUTO_ATIVO: boolean;
+  PRODUTO_DESC: string;
+  PRODUTO_DESCONTO: string;
+  PRODUTO_ID: number;
+  PRODUTO_NOME: string;
+  PRODUTO_PRECO: string;
+  PRODUTO_VENDAS: number;
+  produto_imagem: Produto_imagem[];
 }

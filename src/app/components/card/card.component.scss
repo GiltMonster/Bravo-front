@@ -1,13 +1,39 @@
+@import "../../../global.scss";
+
 .cards-list-mobile {
   scroll-snap-type: x mandatory;
   scroll-padding: 50%;
+
   .card {
     text-wrap: pretty;
     position: relative;
     display: inline-block;
-    width: 80%;
-    height: 100%;
+    width: 300px;
+    height: auto;
+    max-width: 300px;
+    max-height: fit-content;
     scroll-snap-align: center;
+
+    ion-card-header {
+      ion-card-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    ion-card-content {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $success;
+
+      span{
+        font-size: 1rem;
+        font-weight: normal;
+        color: $danger;
+        text-decoration-line: line-through;
+      }
+    }
   }
 }
 
@@ -21,11 +47,37 @@ div[scrollX=true] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   gap: 1rem;
+
+  .card {
+    width: 390px;
+    height: 400px;
+
+    ion-card-header {
+      ion-card-title {
+        font-size: 2rem;
+      }
+    }
+
+    ion-card-content {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $success;
+
+      span{
+        font-size: 1rem;
+        font-weight: normal;
+        color: $danger;
+        text-decoration-line: line-through;
+      }
+    }
+  }
 }
 
-h1{
-  margin: 0 20px;
-  font-size: 2rem;
+.imgCard {
+  width: 100%;
+  height: 200px;
 }
