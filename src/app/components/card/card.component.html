@@ -1,22 +1,21 @@
 @if(isMobile){
-@for(categoria of categories; track categoria.CATEGORIA_ID) {
+@for(categoria of categories; track categoria.id) {
 <ion-label class="ion-padding">
-  <h1>{{categoria.CATEGORIA_NOME}}</h1>
+  <h1>{{categoria.nome}}</h1>
 </ion-label>
 
 <div class="cards-list-mobile" scrollX="true">
-  @for(produto of categories[$index].produtos; track produto.PRODUTO_ID){
-
+  @for(produto of categories[$index].produtos; track produto.id){
   <div class="card">
-    <ion-card button (click)="goToDesc(produto.PRODUTO_ID)">
-      <img class="imgCard" alt="img is {{produto.PRODUTO_NOME}}" [src]="produto.produto_imagem[0].IMAGEM_URL" />
+    <ion-card button (click)="goToDesc(produto.id)">
+      <img class="imgCard" alt="img is {{produto.nome}}" [src]="produto.imagens[0].url" />
       <ion-card-header>
-        <ion-card-title>{{produto.PRODUTO_NOME}}</ion-card-title>
+        <ion-card-title>{{produto.nome}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        {{formatPromo(produto.PRODUTO_PRECO, produto.PRODUTO_DESCONTO)}}
+        {{[produto.preco, produto.desconto] | formatPromo}}
         <span>
-          {{formatPrice(produto.PRODUTO_PRECO)}}
+          {{produto.preco | formatPrice}}
         </span>
       </ion-card-content>
     </ion-card>
@@ -27,27 +26,27 @@
 
 }@else {
 
-@for(categoria of categories; track categoria.CATEGORIA_ID) {
+@for(categoria of categories; track categoria.id) {
 
 <ion-label class="ion-padding">
-  <h1 class="web-title">{{categoria.CATEGORIA_NOME}}</h1>
+  <h1 class="web-title">{{categoria.nome}}</h1>
 </ion-label>
 
 <div class="cards-list-web web-container">
 
-  @for(produto of categories[$index].produtos; track produto.PRODUTO_ID;) {
+  @for(produto of categories[$index].produtos; track produto.id;) {
 
-  <ion-card class="card" button (click)="goToDesc(produto.PRODUTO_ID)">
-    <img class="imgCard" alt="img is {{produto.PRODUTO_NOME}}" [src]="produto.produto_imagem[0].IMAGEM_URL" />
+  <ion-card class="card" button (click)="goToDesc(produto.id)">
+    <img class="imgCard" alt="img is {{produto.nome}}" [src]="produto.imagens[0].url" />
     <ion-card-header>
-      <ion-card-title>{{produto.PRODUTO_NOME}}</ion-card-title>
+      <ion-card-title>{{produto.nome}}</ion-card-title>
       <!-- <ion-card-subtitle>{{produto.PRODUTO_DESC}}</ion-card-subtitle> -->
     </ion-card-header>
 
     <ion-card-content>
-      {{formatPromo(produto.PRODUTO_PRECO, produto.PRODUTO_DESCONTO)}}
+      {{[produto.preco, produto.desconto] | formatPromo}}
       <span>
-        {{formatPrice(produto.PRODUTO_PRECO)}}
+        {{produto.preco | formatPrice}}
       </span>
     </ion-card-content>
   </ion-card>

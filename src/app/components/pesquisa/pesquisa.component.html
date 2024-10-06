@@ -11,8 +11,8 @@
         <ion-select class="mobile" placeholder="Categorias" [(ngModel)]="categoriesSelected"
           (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()"
           multiple color="primary">
-          @for(categorie of categories; track categorie.CATEGORIA_ID){
-          <ion-select-option [value]="categorie.CATEGORIA_NOME">{{categorie.CATEGORIA_NOME}}</ion-select-option>
+          @for(categorie of categories; track categorie.id){
+          <ion-select-option [value]="categorie.nome">{{categorie.nome}}</ion-select-option>
           }
         </ion-select>
       </ion-item>
@@ -21,8 +21,8 @@
     <ion-select interface="popover" placeholder="Selecione uma categoria" shape="round" [(ngModel)]="categoriesSelected"
     (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()"
     multiple color="primary">
-      @for(categorie of categories; track categorie.CATEGORIA_ID){
-      <ion-select-option [value]="categorie.CATEGORIA_NOME">{{categorie.CATEGORIA_NOME}}</ion-select-option>
+      @for(categorie of categories; track categorie.id){
+      <ion-select-option [value]="categorie.nome">{{categorie.nome}}</ion-select-option>
       }
     </ion-select>
     }
