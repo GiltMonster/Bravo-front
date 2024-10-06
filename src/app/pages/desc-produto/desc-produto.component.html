@@ -1,3 +1,87 @@
-<p>
-  desc-produto works!
-</p>
+@if (isMobile) {
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Descrição do produto
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+}
+
+<ion-content>
+  @if (isMobile) {
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Descrição do produto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  }
+  <div class="container">
+
+    <div class="container-produto">
+
+      @if(isLoaded){
+
+      <div class="conteinerImg">
+        <img class="imgPrincipal" [(src)]="produto.imagens[indexImagem].url" alt="Isso é o carro, {{produto.nome}}">
+        @if(produto.imagens.length > 1){
+
+          <div class="select-container">
+            @for(imagem of produto.imagens; track $index){
+              <img class="img-list-item" [ngClass]="{'selected': $index === indexImagem}" [src]="imagem.url" alt="{{produto.nome}}" (click)="selectImg($index, $event)">
+            }
+          </div>
+        }
+      </div>
+
+      <div class="container-desc">
+        <h1 class="nome">{{produto.nome}}</h1>
+        <p class="preco">{{produto.preco | formatPrice }}</p>
+        <div class="compra-container">
+          <ion-button fill="outline" shape="round">Adicionar ao carrinho
+            <ion-icon slot="end" name="cart-outline" size="large"></ion-icon>
+          </ion-button>
+          <ion-button fill="outline" shape="round">Comprar
+            <ion-icon slot="end" name="cash-outline" size="large"></ion-icon>
+          </ion-button>
+        </div>
+        <p class="descricao">{{produto.descricao}}</p>
+        <p class="estoque">Uni. {{produto.estoque}}</p>
+      </div>
+
+      }@else {
+
+      <div class="conteinerImg">
+        <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
+
+        <div class="select-container">
+          <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+        </div>
+      </div>
+
+
+      <div class="container-desc">
+        <p><ion-skeleton-text [animated]="true" class="skeleton-nome"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-preco"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo"></ion-skeleton-text></p>
+        <p><ion-skeleton-text [animated]="true" class="skeleton-descricao-conteudo-final"></ion-skeleton-text></p>
+      </div>
+
+      }
+    </div>
+  </div>
+
+</ion-content>
