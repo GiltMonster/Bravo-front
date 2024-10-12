@@ -18,7 +18,7 @@ export class PesquisaComponent {
   styleSearchbarContainer: string = "searchbar-content";
 
   @Input() categories: Category[] = [];
-
+  @Input() isLoaded: boolean = false;
 
   categoriesSelected: string[] = [];
 

@@ -6,8 +6,8 @@
       placeholder="Digite o nome de um carro"></ion-input>
 
     @if(isMobile){
-    <ion-list>
-      <ion-item lines="full">
+
+
         <ion-select class="mobile" placeholder="Categorias" [(ngModel)]="categoriesSelected"
           (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()"
           multiple color="primary">
@@ -15,8 +15,6 @@
           <ion-select-option [value]="categorie.nome">{{categorie.nome}}</ion-select-option>
           }
         </ion-select>
-      </ion-item>
-    </ion-list>
     }@else {
     <ion-select interface="popover" placeholder="Selecione uma categoria" shape="round" [(ngModel)]="categoriesSelected"
     (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()"
