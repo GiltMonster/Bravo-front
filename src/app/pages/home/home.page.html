@@ -17,13 +17,13 @@
   </ion-header>
   }
 
-  <div class="searchbar-container">
-    <app-pesquisa [categories]="categoriesWithProducts"></app-pesquisa>
+  <div class="container">
+    <app-pesquisa [categories]="categoriesWithProducts" [isLoaded]="isLoaded"></app-pesquisa>
   </div>
 
-<div class="container">
-  <app-card [categories]="categoriesWithProducts"></app-card>
-</div>
+  <div class="container">
+    <app-card [categories]="categoriesWithProducts" [isLoaded]="isLoaded"></app-card>
+  </div>
 
 
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->

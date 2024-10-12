@@ -19,6 +19,7 @@ import { ProdutoService } from 'src/app/services/home/produto.service';
 export class HomePage implements OnInit {
 
   isMobile: boolean;
+  isLoaded: boolean = false;
 
   categoriesWithProducts: Category[] = [];
 
@@ -36,8 +37,8 @@ export class HomePage implements OnInit {
 
   sendHomeData() {
     this.produtoService.getHomeData().subscribe(((data) => {
-      console.log(data);
       this.categoriesWithProducts = data;
+      this.isLoaded = true;
     }));
   }
 
