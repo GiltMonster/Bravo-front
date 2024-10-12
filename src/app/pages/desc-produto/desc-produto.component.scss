@@ -2,15 +2,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 40px;
+  padding: 40px 0;
 
   .conteinerImg {
 
+    height: 100%;
+    width: 100%;
     .imgPrincipal {
       border-radius: 10px;
       width: 100%;
       height: auto;
-      max-width: 600px;
+      max-width: 900px;
     }
 
     .skeleton-img {
@@ -26,7 +28,7 @@
       display: flex;
       overflow-x: scroll;
       width: 100%;
-      max-width: 600px;
+      max-width: 900px;
       /* Ajuste para manter o mesmo tamanho da imagem principal */
       margin-top: 10px;
 
@@ -56,13 +58,14 @@
   }
 
   .container-desc {
-    width: 50%;
+    width: 70%;
+    margin: 0 0 0 5%;
 
     .nome {
       font-size: 4rem;
       color: var(--ion-color-primary);
       font-weight: bold;
-      margin: 20px 0 5px;
+      margin: 20px 0 20px;
     }
 
     .skeleton-nome {
@@ -85,13 +88,15 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+      margin: 40px 0;
 
       ion-button {
         width: 100%;
         height: auto;
       }
     }
-    .descricao{
+
+    .descricao {
       font-size: 1.5rem;
       margin: 20px 0;
     }
@@ -100,8 +105,22 @@
       width: 20%;
       height: 1rem;
     }
-    .skeleton-descricao-conteudo-final{
+
+    .skeleton-descricao-conteudo-final {
       width: 60%;
     }
   }
+}
+
+.estoque{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+hr{
+  border: 0;
+  height: 1px;
+  background: #333;
+  margin: 20px 0;
 }

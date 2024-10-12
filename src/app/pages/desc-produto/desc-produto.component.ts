@@ -7,7 +7,7 @@ import { FormatPricePipe } from 'src/app/pipes/format-price.pipe';
 import { ProdutoService } from 'src/app/services/home/produto.service';
 import { PlatformService } from 'src/app/services/platform.service';
 import { addIcons } from 'ionicons';
-import { cartOutline, cashOutline } from 'ionicons/icons';
+import { basketOutline, cartOutline, cashOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-desc-produto',
@@ -44,7 +44,7 @@ export class DescProdutoComponent {
     private productService: ProdutoService,
     private route: ActivatedRoute
   ) {
-    addIcons({cartOutline, cashOutline});
+    addIcons({cartOutline, cashOutline, basketOutline});
     this.isMobile = platformService.isMobile();
     this.getProductById();
 

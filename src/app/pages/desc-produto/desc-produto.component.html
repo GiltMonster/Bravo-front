@@ -26,27 +26,33 @@
         <img class="imgPrincipal" [(src)]="produto.imagens[indexImagem].url" alt="Isso é o carro, {{produto.nome}}">
         @if(produto.imagens.length > 1){
 
-          <div class="select-container">
-            @for(imagem of produto.imagens; track $index){
-              <img class="img-list-item" [ngClass]="{'selected': $index === indexImagem}" [src]="imagem.url" alt="{{produto.nome}}" (click)="selectImg($index, $event)">
-            }
-          </div>
+        <div class="select-container">
+          @for(imagem of produto.imagens; track $index){
+          <img class="img-list-item" [ngClass]="{'selected': $index === indexImagem}" [src]="imagem.url"
+            alt="{{produto.nome}}" (click)="selectImg($index, $event)">
+          }
+        </div>
         }
       </div>
 
       <div class="container-desc">
         <h1 class="nome">{{produto.nome}}</h1>
         <p class="preco">{{produto.preco | formatPrice }}</p>
+        <ion-label class="estoque">
+          <ion-icon name="basket-outline" color="primary"></ion-icon>
+          <p>Uni. {{produto.estoque}}</p>
+        </ion-label>
+        <hr>
         <div class="compra-container">
-          <ion-button fill="outline" shape="round">Adicionar ao carrinho
+          <ion-button fill="outline" shape="round" size="large">Adicionar ao carrinho
             <ion-icon slot="end" name="cart-outline" size="large"></ion-icon>
           </ion-button>
-          <ion-button fill="outline" shape="round">Comprar
+          <ion-button fill="outline" shape="round" size="large" color="success">Comprar
             <ion-icon slot="end" name="cash-outline" size="large"></ion-icon>
           </ion-button>
         </div>
         <p class="descricao">{{produto.descricao}}</p>
-        <p class="estoque">Uni. {{produto.estoque}}</p>
+
       </div>
 
       }@else {
