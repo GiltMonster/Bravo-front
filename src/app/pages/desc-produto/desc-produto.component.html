@@ -23,6 +23,7 @@
       @if(isLoaded){
 
       <div class="conteinerImg">
+        @if(produto.imagens.length > 0){
         <img class="imgPrincipal" [(src)]="produto.imagens[indexImagem].url" alt="Isso é o carro, {{produto.nome}}">
         @if(produto.imagens.length > 1){
 
@@ -32,6 +33,9 @@
             alt="{{produto.nome}}" (click)="selectImg($index, $event)">
           }
         </div>
+        }
+        }@else {
+        <ion-icon class="imgNotFound" color="primary" name="car-sport-outline"></ion-icon>
         }
       </div>
 
