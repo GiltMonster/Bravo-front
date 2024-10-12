@@ -10,7 +10,8 @@
   @for(produto of categories[$index].produtos; track produto.id){
   <div class="card">
     <ion-card button (click)="goToDesc(produto.id)">
-      <img class="imgCard" alt="img is {{produto.nome}}" [src]="produto.imagens[0].url" />
+
+      <!-- <img class="imgCard" alt="img is {{produto.nome}}" [src]="produto.imagens[0].url" /> -->
       <ion-card-header>
         <ion-card-title>{{produto.nome}}</ion-card-title>
       </ion-card-header>
@@ -53,7 +54,11 @@
   @for(produto of categories[$index].produtos; track produto.id;) {
 
   <ion-card class="card" button (click)="goToDesc(produto.id)">
-    <img class="imgCard" alt="img is {{produto.nome}}" [src]="produto.imagens[0].url" />
+    @if(produto.imagens.length > 0){
+    <ion-img class="imgCard" alt="img is {{produto.nome}}" [src]="produto.imagens[0].url" />
+    }@else {
+      <ion-icon class="imgCard" color="primary" name="car-sport-outline"></ion-icon>
+    }
     <ion-card-header>
       <ion-card-title>{{produto.nome}}</ion-card-title>
       <!-- <ion-card-subtitle>{{produto.PRODUTO_DESC}}</ion-card-subtitle> -->
@@ -78,13 +83,13 @@
 </ion-label>
 
 <div class="cards-list-web web-container">
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
 </div>
 
 <ion-label class="ion-padding">
@@ -92,13 +97,13 @@
 </ion-label>
 
 <div class="cards-list-web web-container">
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
-  <app-skeleton-card/>
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
 </div>
 
 }
