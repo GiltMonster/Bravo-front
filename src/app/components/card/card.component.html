@@ -1,7 +1,9 @@
 @if(isMobile){
+@if(isLoaded){
+
 @for(categoria of categories; track categoria.id) {
 <ion-label class="ion-padding">
-  <h1>{{categoria.nome}}</h1>
+  <h1 class="mobile-title">{{categoria.nome}}</h1>
 </ion-label>
 
 <div class="cards-list-mobile" scrollX="true">
@@ -23,8 +25,22 @@
   }
 </div>
 }
+}@else{
+<div class="cards-list-mobile" scrollX="true">
+  <div class="card">
+    <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
+    <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+    <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+    <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+  </div>
+</div>
+}
+
 
 }@else {
+
+
+@if(isLoaded){
 
 @for(categoria of categories; track categoria.id) {
 
@@ -54,5 +70,36 @@
   }
 
 </div>
+}
+}@else{
+
+<ion-label class="ion-padding">
+  <ion-skeleton-text [animated]="true" class="skeleton-title"></ion-skeleton-text>
+</ion-label>
+
+<div class="cards-list-web web-container">
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+</div>
+
+<ion-label class="ion-padding">
+  <ion-skeleton-text [animated]="true" class="skeleton-title"></ion-skeleton-text>
+</ion-label>
+
+<div class="cards-list-web web-container">
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+  <app-skeleton-card/>
+</div>
+
 }
 }
