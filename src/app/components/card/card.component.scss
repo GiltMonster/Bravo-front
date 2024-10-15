@@ -1,0 +1,100 @@
+@import "../../../global.scss";
+
+.cards-list-mobile {
+  scroll-snap-type: x mandatory;
+  scroll-padding: 50%;
+
+  .card {
+    text-wrap: pretty;
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    height: auto;
+    max-width: 300px;
+    max-height: fit-content;
+    scroll-snap-align: center;
+    transition: 0.5s;
+
+    ion-card-header {
+      ion-card-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    ion-card-content {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $success;
+
+      span{
+        font-size: 1rem;
+        font-weight: normal;
+        color: $danger;
+        text-decoration-line: line-through;
+      }
+    }
+  }
+}
+
+
+.card:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+//informa o ionic que é uma lista lateral
+div[scrollX=true] {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.cards-list-web {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 1rem;
+
+  .card {
+    width: 370px;
+    height: 400px;
+    transition: 0.5s;
+
+    ion-card-header {
+      padding: 10px 16px;
+      ion-card-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    ion-card-content {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $success;
+
+      span{
+        font-size: 1rem;
+        font-weight: normal;
+        color: $danger;
+        text-decoration-line: line-through;
+      }
+    }
+  }
+}
+
+.web-title{
+  font-size: 2.5rem;
+}
+
+.skeleton-title{
+  width: 20%;
+  height: 2.5rem;
+}
+
+.imgCard {
+  width: 100%;
+  height: 275px;
+}

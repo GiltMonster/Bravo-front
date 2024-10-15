@@ -1,3 +1,110 @@
-<p>
-  card works!
-</p>
+@if(isMobile){
+@if(isLoaded){
+
+@for(categoria of categories; track categoria.id) {
+<ion-label class="ion-padding">
+  <h1 class="mobile-title">{{categoria.nome}}</h1>
+</ion-label>
+
+<div class="cards-list-mobile" scrollX="true">
+  @for(produto of categories[$index].produtos; track produto.id){
+  <div class="card">
+    <ion-card button (click)="goToDesc(produto.id)">
+
+      <!-- <img class="imgCard" alt="img is {{produto.nome}}" [src]="produto.imagens[0].url" /> -->
+      <ion-card-header>
+        <ion-card-title>{{produto.nome}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{[produto.preco, produto.desconto] | formatPromo}}
+        <span>
+          {{produto.preco | formatPrice}}
+        </span>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  }
+</div>
+}
+}@else{
+<div class="cards-list-mobile" scrollX="true">
+  <div class="card">
+    <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
+    <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+    <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+    <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+  </div>
+</div>
+}
+
+
+}@else {
+
+
+@if(isLoaded){
+
+@for(categoria of categories; track categoria.id) {
+
+<ion-label class="ion-padding">
+  <h1 class="web-title">{{categoria.nome}}</h1>
+</ion-label>
+
+<div class="cards-list-web web-container">
+
+  @for(produto of categories[$index].produtos; track produto.id;) {
+
+  <ion-card class="card" button (click)="goToDesc(produto.id)">
+    @if(produto.imagens.length > 0){
+    <ion-img class="imgCard" alt="img is {{produto.nome}}" [src]="produto.imagens[0].url" />
+    }@else {
+      <ion-icon class="imgCard" color="primary" name="car-sport-outline"></ion-icon>
+    }
+    <ion-card-header>
+      <ion-card-title>{{produto.nome}}</ion-card-title>
+      <!-- <ion-card-subtitle>{{produto.PRODUTO_DESC}}</ion-card-subtitle> -->
+    </ion-card-header>
+
+    <ion-card-content>
+      {{[produto.preco, produto.desconto] | formatPromo}}
+      <span>
+        {{produto.preco | formatPrice}}
+      </span>
+    </ion-card-content>
+  </ion-card>
+
+  }
+
+</div>
+}
+}@else{
+
+<ion-label class="ion-padding">
+  <ion-skeleton-text [animated]="true" class="skeleton-title"></ion-skeleton-text>
+</ion-label>
+
+<div class="cards-list-web web-container">
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+</div>
+
+<ion-label class="ion-padding">
+  <ion-skeleton-text [animated]="true" class="skeleton-title"></ion-skeleton-text>
+</ion-label>
+
+<div class="cards-list-web web-container">
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+  <app-skeleton-card />
+</div>
+
+}
+}

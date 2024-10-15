@@ -26,6 +26,10 @@ export const routes: Routes = [
         redirectTo: '/tabs/home',
         pathMatch: 'full',
       },
+      {
+        path: 'desc/produto/:id',
+        loadComponent: () => import('../../pages/desc-produto/desc-produto.component').then((m) => m.DescProdutoComponent),
+      },
     ],
   },
   {
