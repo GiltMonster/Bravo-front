@@ -1,0 +1,70 @@
+@if (isMobile) {
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>create-account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">create-account</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
+
+}
+
+<ion-content>
+  <section class="container">
+    <div class="container-cadastro">
+      <div class="container-img">
+        <img src="../../../assets/img/image.png" alt="">
+      </div>
+
+      <div class="form">
+        <ion-label>
+          <h1>Cadastre-se:</h1>
+          <p>Bem vindo a Loja Bravo - Vamos começar criando uma conta?</p>
+          <hr>
+        </ion-label>
+
+        <form [formGroup]="createAccountForms">
+
+          <ion-input type="name" fill="solid" label="Nome" labelPlacement="floating" name formControlName="name">
+            <ion-icon slot="start" name="people" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input type="name" fill="solid" label="CPF" labelPlacement="floating" formControlName="cpf" maxlength="14" (ionInput)="applyCpfMask($event)">
+            <ion-icon slot="start" name="id-card" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" helperText="Digite um email valido" errorText="E-mail invalido" email formControlName="email">
+            <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input type="password" fill="solid" label="Senha" labelPlacement="floating" errorText="Digite uma senha" formControlName="password" password>
+            <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+
+          <div class="msg-pessword">
+            <ion-input type="password" fill="solid" label="Confirme sua senha" labelPlacement="floating" errorText="Digite uma senha" formControlName="confirmPassword" password>
+              <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+            </ion-input>
+
+            @if(createAccountForms.errors?.['passwordsMismatch'] && createAccountForms.get('confirmPassword')?.touched){
+              <p>As senhas não coincidem!!!</p>
+            }
+          </div>
+
+          <ion-button fill="outline" shape="round" (click)="createAccount()" size="large"
+            [disabled]="!createAccountForms.valid">Login</ion-button>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+</ion-content>
