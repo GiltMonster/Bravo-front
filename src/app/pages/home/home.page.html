@@ -18,7 +18,7 @@
   }
 
   <div class="container">
-    <app-pesquisa [categories]="categoriesWithProducts" [isLoaded]="isLoaded"></app-pesquisa>
+    <app-pesquisa [categories]="categoriesWithProducts" [isLoaded]="isLoaded" (namesCategorys)="updateCategories($event)"></app-pesquisa>
   </div>
 
   <div class="container">

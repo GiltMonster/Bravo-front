@@ -6,7 +6,6 @@ import { PlatformService } from 'src/app/services/platform.service';
 import { PesquisaComponent } from "../../components/pesquisa/pesquisa.component";
 import { CardComponent } from "../../components/card/card.component";
 import Category from 'src/app/interfaces/Category';
-import Produto from 'src/app/interfaces/Product';
 import { ProdutoService } from 'src/app/services/home/produto.service';
 
 @Component({
@@ -22,7 +21,7 @@ export class HomePage implements OnInit {
   isLoaded: boolean = false;
 
   categoriesWithProducts: Category[] = [];
-
+  categoriesWithProductsSec: Category[] = [];
 
   constructor(
     private produtoService: ProdutoService,
@@ -38,12 +37,19 @@ export class HomePage implements OnInit {
   sendHomeData() {
     this.produtoService.getHomeData().subscribe(((data) => {
       this.categoriesWithProducts = data;
+      this.categoriesWithProductsSec = data;
       this.isLoaded = true;
     }));
   }
 
   updateCategories(categories: string[]) {
-    console.log(categories);
+    if (categories.length === 0) {
+      this.categoriesWithProducts = this.categoriesWithProductsSec;
+    }else{
+      this.categoriesWithProducts = this.categoriesWithProducts.filter((category) => {
+        return categories.includes(category.nome);
+      });
+    }
   }
 
 

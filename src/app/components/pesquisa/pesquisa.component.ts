@@ -1,4 +1,4 @@
-import { Component, Input, Output,  } from '@angular/core';
+import { Component, EventEmitter, Input, Output,  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonSearchbar, IonList, IonItem, IonSelect, IonSelectOption, IonInfiniteScroll, IonInfiniteScrollContent, IonContent, IonChip, IonButton, IonInput } from "@ionic/angular/standalone";
 import Category from 'src/app/interfaces/Category';
@@ -19,6 +19,7 @@ export class PesquisaComponent {
 
   @Input() categories: Category[] = [];
   @Input() isLoaded: boolean = false;
+  @Output() namesCategorys: EventEmitter<string[]> = new EventEmitter();
 
   categoriesSelected: string[] = [];
 
@@ -63,7 +64,7 @@ export class PesquisaComponent {
 
   updateCategory(categoriName: string[]) {
     this.btnUpdate = false;
-    throw new Error('Method not implemented.');
+    this.namesCategorys.emit(categoriName);
   }
 
 
