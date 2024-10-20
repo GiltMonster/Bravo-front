@@ -18,7 +18,7 @@
 
 <ion-content>
   <section class="container">
-    <div class="container-login">
+    <ion-card class="container-login">
       <div class="form">
         <ion-label>
           <h1>Login:</h1>
@@ -28,9 +28,13 @@
 
 
         <form [formGroup]="loginForms">
-          <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" helperText="Digite um email valido" errorText="E-mail invalido" email formControlName="email"></ion-input>
+          <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" helperText="Digite um email valido" errorText="E-mail invalido" email formControlName="email">
+            <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
+          </ion-input>
 
-            <ion-input type="password" fill="solid" label="Senha" labelPlacement="floating" errorText="Digite uma senha" formControlName="password"></ion-input>
+            <ion-input type="password" fill="solid" label="Senha" labelPlacement="floating" errorText="Digite uma senha" formControlName="password">
+              <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+            </ion-input>
 
           <ion-button fill="outline" shape="round" (click)="login()" size="large" [disabled]="!loginForms.valid">Login</ion-button>
 
@@ -43,7 +47,7 @@
       <div class="container-img">
         <img src="../../../assets/img/image.png" alt="">
       </div>
-    </div>
+    </ion-card>
   </section>
 
 </ion-content>
