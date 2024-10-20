@@ -6,7 +6,6 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #F1F3F9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     margin: auto;
@@ -81,11 +80,9 @@ section {
 
 ion-input{
   --border-color: #606060;
-  --highlight-color-focused: #3c3c3c;
   --highlight-color-invalid: #e02d3c;
   --highlight-color-valid: #08875D;
 }
-
 .msg-pessword{
   width: 100%;
   margin: 0;
@@ -101,4 +98,21 @@ ion-input{
     margin: 0 0 20px 0
   }
 
+}
+
+@media(prefers-color-scheme: light){
+  .container-cadastro{
+    --background: #F1F3F9;
+  }
+
+  h1{
+    color: #3c3c3c;
+  }
+
+  ion-input{
+    --border-color: #606060;
+    --highlight-color-focused: #3c3c3c;
+    --highlight-color-invalid: #e02d3c;
+    --highlight-color-valid: #08875D;
+  }
 }
