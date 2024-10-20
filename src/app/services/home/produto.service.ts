@@ -15,7 +15,7 @@ export class ProdutoService {
 
 
   getHomeData() {
-    return this.http.get<Category[]>(environment.BASE_API_URL);
+    return this.http.get<Category[]>(environment.API_URL_PRODUCTS);
   }
 
   getProductById(id: string) {

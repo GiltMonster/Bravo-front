@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import Message from 'src/app/interfaces/Message';
 import { User } from 'src/app/interfaces/User';
 import { environment } from 'src/environments/environment.development';
 
@@ -13,6 +14,6 @@ export class UserService {
   ) { }
 
   createUser(user: User) {
-    return this.http.post<User>(`${environment.BASE_API_URL}/createUsuario`, user);
+    return this.http.post<Message>(`${environment.API_URL_USUARIO}`, user);
   }
 }
