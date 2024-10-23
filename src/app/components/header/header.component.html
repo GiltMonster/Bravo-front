@@ -8,9 +8,16 @@
       </a>
 
       <div class="buttons-container">
-        <ion-button fill="outline" shape="round">Seu perfil</ion-button>
+        @if (userAuthenticated) {
+        <ion-button fill="outline" shape="round" (click)="perfil()">Seu perfil</ion-button>
         <ion-button fill="outline" shape="round">Carrinho</ion-button>
+        }
+        @if (userAuthenticated) {
+        <ion-button fill="outline" shape="round" (click)="logout()">Sair</ion-button>
+        }@else {
         <ion-button fill="outline" shape="round" (click)="login()">Logar</ion-button>
+        }
+
       </div>
     </div>
 
