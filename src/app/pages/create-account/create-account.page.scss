@@ -82,6 +82,7 @@ ion-input{
   --border-color: #606060;
   --highlight-color-invalid: #e02d3c;
   --highlight-color-valid: #08875D;
+  font-size: large;
 }
 .msg-pessword{
   width: 100%;
@@ -114,5 +115,6 @@ ion-input{
     --highlight-color-focused: #3c3c3c;
     --highlight-color-invalid: #e02d3c;
     --highlight-color-valid: #08875D;
+    --color	: #000000;
   }
 }

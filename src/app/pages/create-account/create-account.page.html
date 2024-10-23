@@ -59,7 +59,7 @@
             }
           </div>
 
-          <ion-button  fill="outline" shape="round" (click)="createAccount()" size="large"
+          <ion-button  fill="outline" shape="round" color="success" (click)="createAccount()" size="large"
           [disabled]="!createAccountForms.valid || !isDisable">Cadastrar-se</ion-button>
 
           <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)" positionAnchor="form" position="top"
