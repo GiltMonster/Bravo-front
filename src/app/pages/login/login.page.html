@@ -19,7 +19,7 @@
 <ion-content>
   <section class="container">
     <ion-card class="container-login">
-      <div class="form">
+      <div class="form" id="form">
         <ion-label>
           <h1>Login:</h1>
           <p>Bem vindo a Loja Bravo - Vamos começar a comprar os carros dos seus sonhos?</p>
@@ -36,11 +36,16 @@
               <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
             </ion-input>
 
-          <ion-button fill="outline" shape="round" (click)="login()" size="large" [disabled]="!loginForms.valid">Logar-se</ion-button>
+          <ion-button fill="outline" shape="round" (click)="login()" size="large" [disabled]="!loginForms.valid || !isDisable">Logar-se</ion-button>
 
           <ion-label>
             <p>Não tem uma conta? <a href="/register">Cadastre-se</a></p>
           </ion-label>
+
+          <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)" positionAnchor="form" position="top"
+          [color]="isError ? 'danger' : 'success'"
+          [icon]="isError ? 'close-circle' : 'lock-open'"
+          ></ion-toast>
 
         </form>
       </div>

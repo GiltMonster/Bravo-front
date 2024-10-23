@@ -1,33 +1,74 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonButton, IonInput, IonCard, IonIcon } from '@ionic/angular/standalone';
+import { ReactiveFormsModule, Validators, NonNullableFormBuilder } from '@angular/forms';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonButton, IonInput, IonCard, IonIcon, IonToast } from '@ionic/angular/standalone';
 import { PlatformService } from 'src/app/services/platform.service';
 import { addIcons } from 'ionicons';
-import { lockClosed, mail } from 'ionicons/icons';
+import { closeCircle, lockClosed, lockOpen, mail } from 'ionicons/icons';
+import { AuthLoginService } from 'src/app/services/auth/auth-login.service';
+import Message from 'src/app/interfaces/Message';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonCard, IonInput, IonButton, IonLabel, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, ReactiveFormsModule,]
+  imports: [IonToast, IonIcon, IonCard, IonInput, IonButton, IonLabel, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, ReactiveFormsModule,]
 })
 export class LoginPage {
 
   isMobile = this.platformService.isMobile();
+  msg: Message = { message: '', token: '' };
+  isToastOpen: boolean = false;
+  isError: boolean = false;
+  isDisable: boolean = true;
 
-  constructor(
-    private platformService: PlatformService
-  ) { addIcons({ lockClosed, mail }); }
-
-  loginForms = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+  protected loginForms = this.formBuilder.group({
+    email: this.formBuilder.control('', [Validators.required, Validators.email]),
+    password: this.formBuilder.control('', [Validators.required]),
   });
 
+
+
+  constructor(
+    private platformService: PlatformService,
+    private authService: AuthLoginService,
+    protected formBuilder: NonNullableFormBuilder,
+    private router: Router
+  ) { addIcons({ lockClosed, mail, lockOpen, closeCircle }); }
+
   login() {
-    console.log(this.loginForms.value);
+    this.isDisable = false;
+    const user = {
+      email: this.loginForms.get('email')!.value,
+      password: this.loginForms.get('password')!.value,
+    }
+
+    this.authService.login(user.email, user.password).subscribe(
+      (response: Message) => {
+
+        localStorage.setItem('token', JSON.stringify(response.token));
+        this.msg = response;
+        this.setOpen(true);
+        this.isError = false;
+        this.loginForms.reset();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        this.msg = error.error
+        this.isError = true;
+        this.setOpen(true);
+        this.isDisable = true;
+      }
+    );
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isToastOpen = isOpen;
   }
 
 
