@@ -1,4 +1,5 @@
 export default interface Message {
   message: string;
-  usuario: string;
+  usuario?: string;
+  token?: string;
 }
