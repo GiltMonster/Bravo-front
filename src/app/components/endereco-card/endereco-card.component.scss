@@ -1,0 +1,62 @@
+.endereco-salvo {
+  width: 90%;
+  height: auto;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 10px 30px;
+
+  .nome-cep {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .container-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    .logradouro-numero {
+      margin: 0;
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    .cidade-estado {
+      margin: 0 0 20px 0;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .container-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    ion-button {
+      width: 45%;
+    }
+  }
+
+  hr {
+    width: 100%;
+    height: 1px;
+    background: #606060;
+  }
+
+  p {
+    a {
+      font-weight: bold;
+    }
+  }
+}

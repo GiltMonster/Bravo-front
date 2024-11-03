@@ -1,0 +1,37 @@
+<ion-card class="endereco-salvo">
+  @if(!editMode){
+  <div>
+    <div class="nome-cep">
+      <h2>{{endereco.nome}}</h2>
+      <h2>{{endereco.cep | formatCEP}}</h2>
+    </div>
+    <hr>
+    <div class="container-info">
+      <p class="logradouro-numero">{{endereco.logradouro}}, <span>{{endereco.numero}}</span></p>
+      <p class="cidade-estado">{{endereco.cidade}}, <span>{{endereco.estado}}</span></p>
+    </div>
+    <p>{{endereco.complemento}}</p>
+    <div class="container-buttons">
+      <ion-button fill="outline" shape="round" color="success" size="large" (click)="toggleEditMode()">Editar</ion-button>
+      <ion-button fill="outline" shape="round" color="primary" size="large" (click)="deleteEnderecoById(endereco.id!)">Excluir</ion-button>
+    </div>
+  </div>
+
+}@else{
+  <div>
+    <form [formGroup]="enderecoForm">
+      <ion-input formControlName="nome" placeholder="Nome"></ion-input>
+      <ion-input formControlName="cep" placeholder="CEP"></ion-input>
+      <ion-input formControlName="logradouro" placeholder="Logradouro"></ion-input>
+      <ion-input formControlName="numero" placeholder="Número"></ion-input>
+      <ion-input formControlName="cidade" placeholder="Cidade"></ion-input>
+      <ion-input formControlName="estado" placeholder="Estado"></ion-input>
+      <ion-input formControlName="complemento" placeholder="Complemento"></ion-input>
+    </form>
+    <div class="container-buttons">
+      <ion-button fill="outline" shape="round" color="success" size="large" (click)="saveEndereco()">Salvar</ion-button>
+      <ion-button fill="outline" shape="round" color="primary" size="large" (click)="cancelEdit()">Cancelar</ion-button>
+    </div>
+  </div>
+}
+</ion-card>
