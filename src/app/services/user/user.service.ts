@@ -16,4 +16,12 @@ export class UserService {
   createUser(user: User) {
     return this.http.post<Message>(`${environment.API_URL_USUARIO}`, user);
   }
+
+  getUser(id: string) {
+    return this.http.get<User>(`${environment.API_URL_USUARIO}/${id}`);
+  }
+
+  updateUser(user: User) {
+    return this.http.put<Message>(`${environment.API_URL_USUARIO}/${user.id}`, user);
+  }
 }
