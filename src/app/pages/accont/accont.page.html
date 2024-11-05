@@ -1,0 +1,77 @@
+@if(isMobile){
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>accont</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">accont</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
+
+}
+
+<ion-content>
+  <section class="container">
+
+    <div class="container-infos">
+      <div class="textos-perfil">
+        <p>Sua área:</p>
+        <h1>Olá, {{userAuthenticated.name}} tudo bem?</h1>
+      </div>
+
+      <ion-button shape="round" color="success">
+        <ion-icon slot="icon-only" name="information"></ion-icon>
+      </ion-button>
+
+    </div>
+
+    <div class="container-btns">
+      <ion-card button (click)="enderecos()">
+        <img alt="Silhouette of mountains" src="../../../assets/img/MapPin.svg" />
+        <div class="card-content-background">
+          <ion-card-header>
+            <ion-card-title>Seus endereços:</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            Lista dos seus endereços salvos.
+          </ion-card-content>
+        </div>
+      </ion-card>
+
+      <ion-card button (click)="pedidos()">
+        <img alt="Silhouette of mountains" src="../../../assets/img/Package.svg" />
+        <div class="card-content-background">
+          <ion-card-header>
+            <ion-card-title>Seus produtos:</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+             Veja os produtos que você já comprou.
+          </ion-card-content>
+        </div>
+      </ion-card>
+
+      <ion-card button (click)="informacoesPerfil()">
+        <img alt="Silhouette of mountains" src="../../../assets/img/Info.svg" />
+
+        <div class="card-content-background">
+          <ion-card-header>
+            <ion-card-title>Suas informações:</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            Aqui você pode ver e editar suas informações pessoais.
+          </ion-card-content>
+        </div>
+      </ion-card>
+
+    </div>
+
+  </section>
+</ion-content>
