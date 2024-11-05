@@ -1,0 +1,114 @@
+section {
+  width: 100%;
+  height: auto;
+
+  .container-atualizar-cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin: auto;
+    width: 100%;
+    height: 800px;
+    margin-top: 100px;
+
+    .form {
+      width: 100%;
+      height: auto;
+      max-width: 50%;
+      margin: 20px;
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      hr {
+        width: 85%;
+        height: 1px;
+        background: #606060;
+      }
+
+      ion-label {
+        font-size: 1.5rem;
+        margin: 0px 20px;
+      }
+
+      ion-input {
+        margin-bottom: 20px;
+      }
+
+      ion-button {
+        width: 80%;
+      }
+
+      p{
+        a {
+          font-weight: bold;
+        }
+      }
+    }
+
+    form{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+  }
+
+}
+
+ion-input{
+  --border-color: #606060;
+  --highlight-color-invalid: #e02d3c;
+  --highlight-color-valid: #08875D;
+  font-size: large;
+}
+
+.container-btn{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+gap: 20px;
+}
+
+.msg-pessword{
+  width: 100%;
+  margin: 0;
+  text-align: start;
+
+  ion-input{
+    --padding-bottom: 5px;
+  }
+
+  p{
+    color: #e02d3c;
+    font-size: 1.2rem;
+    margin: 0 0 20px 0
+  }
+
+}
+
+@media(prefers-color-scheme: light){
+  .container-cadastro{
+    --background: #F1F3F9;
+  }
+
+  h1{
+    color: #3c3c3c;
+  }
+
+  ion-input{
+    --border-color: #606060;
+    --highlight-color-focused: #3c3c3c;
+    --highlight-color-invalid: #e02d3c;
+    --highlight-color-valid: #08875D;
+    --color	: #000000;
+  }
+}
