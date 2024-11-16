@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { IonContent, IonLabel, IonHeader, IonToolbar, IonTitle, IonSkeletonText, IonButton, IonIcon } from "@ionic/angular/standalone";
 import Product from 'src/app/interfaces/Product';
 import { FormatPricePipe } from 'src/app/pipes/format-price.pipe';
@@ -8,6 +8,8 @@ import { ProdutoService } from 'src/app/services/home/produto.service';
 import { PlatformService } from 'src/app/services/platform.service';
 import { addIcons } from 'ionicons';
 import { basketOutline, cartOutline, cashOutline, carSportOutline } from 'ionicons/icons';
+import { CarrinhoService } from 'src/app/services/produto/carrinho.service';
+import { AuthLoginService } from 'src/app/services/auth/auth-login.service';
 
 @Component({
   selector: 'app-desc-produto',
@@ -20,7 +22,7 @@ export class DescProdutoComponent {
 
   id = this.route.snapshot.paramMap.get('id');
   indexImagem: number = 0;
-  isMobile: boolean;
+  isMobile: boolean = this.platformService.isMobile();
   isLoaded: boolean = false;
 
   produto: Product = {
@@ -30,6 +32,7 @@ export class DescProdutoComponent {
     preco: "",
     desconto: "",
     estoque: 0,
+    indisponivel: false,
     imagens: [
       {
         id: 0,
@@ -40,12 +43,14 @@ export class DescProdutoComponent {
   };
 
   constructor(
-    platformService: PlatformService,
+    private platformService: PlatformService,
     private productService: ProdutoService,
-    private route: ActivatedRoute
+    private carrinhoService: CarrinhoService,
+    private authService: AuthLoginService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
-    addIcons({cartOutline, cashOutline, basketOutline, carSportOutline});
-    this.isMobile = platformService.isMobile();
+    addIcons({ cartOutline, cashOutline, basketOutline, carSportOutline });
     this.getProductById();
 
   }
@@ -57,11 +62,28 @@ export class DescProdutoComponent {
     });
   }
 
-  selectImg(index: number, event:any) {
+  selectImg(index: number, event: any) {
     this.indexImagem = index;
     const target = event.target as HTMLElement;
     target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
 
+  addCarrinho(produto_id: number, quantidade: number = 1) {
+    this.authService.verifyToken().subscribe(
+      (data) => {
+        this.carrinhoService.addItemCarrinho(data.id!, produto_id, quantidade).subscribe(
+          (data) => {
+            console.log(data);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      },
+      (error) => {
+        console.log(error);
+        this.router.navigate(['/login']);
+      });
   }
 
 }

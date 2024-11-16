@@ -42,16 +42,23 @@
       <div class="container-desc">
         <h1 class="nome">{{produto.nome}}</h1>
         <p class="preco">{{produto.preco | formatPrice }}</p>
+        @if(!produto.indisponivel){
         <ion-label class="estoque">
           <ion-icon name="basket-outline" color="primary"></ion-icon>
           <p>Uni. {{produto.estoque}}</p>
         </ion-label>
+        }@else{
+          <ion-label color="warning">
+            <h1 style="font-size: 3em; text-decoration: underline;">Indisponivel</h1>
+          </ion-label>
+        }
+
         <hr>
         <div class="compra-container">
-          <ion-button fill="outline" shape="round" size="large">Adicionar ao carrinho
+          <ion-button fill="outline" shape="round" size="large" [disabled]="produto.indisponivel" (click)="addCarrinho(produto.id!)">Adicionar ao carrinho
             <ion-icon slot="end" name="cart-outline" size="large"></ion-icon>
           </ion-button>
-          <ion-button fill="outline" shape="round" size="large" color="success">Comprar
+          <ion-button fill="outline" shape="round" size="large" color="success" [disabled]="produto.indisponivel">Comprar
             <ion-icon slot="end" name="cash-outline" size="large"></ion-icon>
           </ion-button>
         </div>
