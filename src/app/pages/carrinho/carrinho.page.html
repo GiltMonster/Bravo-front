@@ -1,0 +1,155 @@
+@if (isMobile) {
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>carrinho</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">carrinho</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
+
+}
+
+<ion-content>
+
+  <section class="container">
+
+    <ion-card>
+
+      <ion-card-header>
+        @if (usuario.name) {
+        <ion-card-title class="title-check">
+          <ion-label>
+            Olá {{usuario.name}}, seu carrinho:
+          </ion-label>
+
+        </ion-card-title>
+
+
+        }@else {
+        <ion-card-title>
+          Olá <ion-skeleton-text [animated]="true" style="width: 100px;"></ion-skeleton-text>, seu carrinho:
+        </ion-card-title>
+        }
+        <ion-card-subtitle>
+          <ion-label>
+            Aqui voce pode encontrar seus futuros produtos
+          </ion-label>
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-list>
+        @if(itensCarrinho.length){
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label>
+              <h1>Endereço de entrega</h1>
+            </ion-label>
+          </ion-item-divider>
+
+          <ion-radio-group (ionChange)="handleChange($event)">
+            @for (endereco of enderecos; track endereco.id) {
+            <ion-item lines="full" button>
+              <ion-radio [value]="endereco.id" aria-label="Seleciona o endereco desejado para entrega" slot="start">
+              </ion-radio>
+
+              <ion-label>
+                <h1>{{endereco.nome}}, {{endereco.cep | formatCEP}}</h1>
+                <p>{{endereco.logradouro}}, {{endereco.numero}}</p>
+              </ion-label>
+
+              <ion-label>
+                <h1>{{endereco.cidade}}</h1>
+                <p>{{endereco.estado}}</p>
+              </ion-label>
+
+
+              <ion-label>
+                <h1>{{endereco.complemento}}</h1>
+              </ion-label>
+            </ion-item>
+            }
+          </ion-radio-group>
+
+        </ion-item-group>
+
+
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label>
+              <h1>Produtos</h1>
+            </ion-label>
+
+            <ion-label slot="end">
+              <ion-checkbox labelPlacement="end" aria-label="Adicionado todos os produtos a sacola de produtos"
+                (click)="selecionarTodos()" slot="start">
+                Marcar todos os produtos!
+              </ion-checkbox>
+            </ion-label>
+          </ion-item-divider>
+
+
+          @for(item of itensCarrinho; track item.id_produto){
+          <ion-item lines="full" button class="item-carrinho">
+            <ion-checkbox slot="start" aria-label="Adicionado a sacola de produtos"
+              [(ngModel)]="item.selecionado"></ion-checkbox>
+
+            @if (editMode && item.id_produto === idProdutoEdit) {
+              <ion-input type="number" fill="solid" label="Uni. estoque" labelPlacement="floating"
+                [(ngModel)]="item.quantidade">
+                <ion-icon slot="start" name="file-tray" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+            }@else {
+            <ion-label (click)="goto(item.id_produto)">
+              <h1>{{item.nome}}</h1>
+              <p>Uni. {{item.quantidade}}</p>
+            </ion-label>
+            }
+            <ion-label>
+              <h1>Preco: {{item.preco | formatPrice}}</h1>
+              <p>Valor do desconto: {{item.desconto | formatPrice}}</p>
+            </ion-label>
+            <ion-label>
+              <h1>Total:</h1>
+              <p>{{getTotalUnidade(item) | formatPrice }}</p>
+            </ion-label>
+
+            @if (editMode && item.id_produto === idProdutoEdit) {
+            <ion-button (click)="saveStock(item.quantidade, item)" shape="round" size="large" color="success">
+              <ion-icon slot="icon-only" name="save" aria-hidden="true"></ion-icon>
+            </ion-button>
+            }@else {
+            <ion-button (click)="toggleMode(item.id_produto)" shape="round" size="large">
+              <ion-icon slot="icon-only" name="pencil" aria-hidden="true"></ion-icon>
+            </ion-button>
+
+            }
+
+            <ion-button (click)="removerItem(item.id_produto)" shape="round" size="large">
+              <ion-icon slot="icon-only" name="trash" aria-hidden="true"></ion-icon>
+            </ion-button>
+          </ion-item>
+          }
+          <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+            positionAnchor="form" position="bottom" [color]="isError ? 'danger' : 'success'"
+            [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
+        </ion-item-group>
+        }@else {
+        <ion-item>
+          <ion-label>Nenhum item no carrinho</ion-label>
+        </ion-item>
+        }
+
+
+      </ion-list>
+    </ion-card>
+
+    <ion-button (click)="finalizarCompra()" shape="round" [disabled]="!itensCarrinho.length && !anyItemChecked" size="large">Finalizar Compra</ion-button>
+  </section>
+</ion-content>
