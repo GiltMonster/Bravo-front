@@ -10,7 +10,12 @@
       <div class="buttons-container">
         @if (userAuthenticated) {
         <ion-button fill="outline" shape="round" (click)="perfil()">Seu perfil</ion-button>
-        <ion-button fill="outline" shape="round">Carrinho</ion-button>
+        <ion-button fill="outline" shape="round" (click)="carrinho()">
+          <ion-label>Carrinho</ion-label>
+          @if(itensLength > 0){
+            <ion-badge class="btn-badge">{{itensLength}}</ion-badge>
+          }
+        </ion-button>
         }
         @if (userAuthenticated) {
         <ion-button fill="outline" shape="round" (click)="logout()">Sair</ion-button>
