@@ -7,5 +7,6 @@ export default interface Product {
   preco: string;
   desconto: string;
   estoque: number;
+  indisponivel: boolean;
   imagens: Produto_imagem[];
 }
