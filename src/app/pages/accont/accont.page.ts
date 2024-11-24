@@ -54,7 +54,6 @@ export class AccontPage implements OnInit {
   }
 
   pedidos() {
-    throw new Error('Rota não implementada');
     this.router.navigate(['/pedidos']);
   }
 
