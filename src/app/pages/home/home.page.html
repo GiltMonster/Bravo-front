@@ -25,6 +25,7 @@
     <app-card [categories]="categoriesWithProducts" [isLoaded]="isLoaded"></app-card>
   </div>
 
-
-  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+  @if (!isMobile) {
+    <app-footer></app-footer>
+  }
 </ion-content>
