@@ -147,16 +147,20 @@ export class CarrinhoPage implements OnInit {
   getItensCarrinho(id_user: string) {
     this.carrinhoService.listaCarrinho(id_user).subscribe((response) => {
       this.itensCarrinho = response;
-    })
+    }, (error) => {
+      this.msg = error.error
+      this.isError = true;
+      this.setOpen(true);
+    });
   }
 
   getEnderecos(id_user: string) {
     this.enderecoService.getListEndereco(id_user).subscribe((response) => {
       this.enderecos = response;
-      console.log(this.enderecos);
-
     }, (error) => {
-      console.log(error);
+      this.msg = error.error
+      this.isError = true;
+      this.setOpen(true);
     });
   }
 
@@ -169,7 +173,7 @@ export class CarrinhoPage implements OnInit {
   }
 
   getTotalUnidade(item: Item_carrinho): string {
-    return (parseFloat(item.preco) * parseFloat(item.quantidade)).toFixed(2);
+    return ((parseFloat(item.preco) * parseFloat(item.quantidade)) - Number(item.desconto)).toFixed(2);
   }
 
   toggleMode(id_produto: number) {
