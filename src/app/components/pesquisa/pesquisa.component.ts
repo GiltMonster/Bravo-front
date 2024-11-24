@@ -8,7 +8,7 @@ import { PlatformService } from 'src/app/services/platform.service';
   selector: 'app-pesquisa',
   templateUrl: './pesquisa.component.html',
   styleUrls: ['./pesquisa.component.scss'],
-  imports: [IonInput, IonButton, IonChip, IonContent, IonInfiniteScrollContent, IonInfiniteScroll, IonItem, IonList, IonSearchbar, IonSelect, IonSelectOption, FormsModule],
+  imports: [IonInput, IonChip, IonSelect, IonSelectOption, FormsModule],
   standalone: true,
 })
 export class PesquisaComponent {
