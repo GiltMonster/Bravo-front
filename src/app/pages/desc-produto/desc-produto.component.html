@@ -39,7 +39,7 @@
         }
       </div>
 
-      <div class="container-desc">
+      <div class="container-desc" id="container-desc">
         <h1 class="nome">{{produto.nome}}</h1>
         <p class="preco">{{produto.preco | formatPrice }}</p>
         @if(!produto.indisponivel){
@@ -48,19 +48,20 @@
           <p>Uni. {{produto.estoque}}</p>
         </ion-label>
         }@else{
-          <ion-label color="warning">
-            <h1 style="font-size: 3em; text-decoration: underline;">Indisponivel</h1>
-          </ion-label>
+        <ion-label color="warning">
+          <h1 style="font-size: 3em; text-decoration: underline;">Indisponivel</h1>
+        </ion-label>
         }
 
         <hr>
         <div class="compra-container">
-          <ion-button fill="outline" shape="round" size="large" [disabled]="produto.indisponivel" (click)="addCarrinho(produto.id!)">Adicionar ao carrinho
+          <ion-button fill="outline" shape="round" size="large" [disabled]="produto.indisponivel"
+            (click)="addCarrinho(produto.id!)">Adicionar ao carrinho
             <ion-icon slot="end" name="cart-outline" size="large"></ion-icon>
           </ion-button>
-          <ion-button fill="outline" shape="round" size="large" color="success" [disabled]="produto.indisponivel">Comprar
+          <!-- <ion-button fill="outline" shape="round" size="large" color="success" [disabled]="produto.indisponivel">Comprar
             <ion-icon slot="end" name="cash-outline" size="large"></ion-icon>
-          </ion-button>
+          </ion-button> -->
         </div>
         <p class="descricao">{{produto.descricao}}</p>
 
@@ -99,6 +100,11 @@
 
       }
     </div>
+
+    <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+      positionAnchor="container-desc" position="top" [color]="isError ? 'danger' : 'success'"
+      [icon]="isError ? 'close-circle' : 'bag-add'">
+    </ion-toast>
   </div>
 
 </ion-content>
