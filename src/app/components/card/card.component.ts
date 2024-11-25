@@ -36,7 +36,7 @@ export class CardComponent{
 
 
   goToDesc(id: number) {
-    this.isMobile ? this.router.navigate(['/mobile/tabs/desc/produto/', id]) : this.router.navigate(['/desc/produto/', id]);
+    this.isMobile ? this.router.navigate(['/mobile/tabs/page/produto/', id]) : this.router.navigate(['/desc/produto/', id]);
   }
 
 
