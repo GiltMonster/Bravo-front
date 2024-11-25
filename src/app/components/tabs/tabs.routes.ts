@@ -12,24 +12,25 @@ export const routes: Routes = [
           import('../../pages/home/home.page').then((m) => m.HomePage),
       },
       {
-        path: 'tab2',
+        path: 'carrinho',
         loadComponent: () =>
-          import('../../pages/tab2/tab2.page').then((m) => m.Tab2Page),
+          import('../../pages/carrinho/carrinho.page').then((m) => m.CarrinhoPage),
       },
       {
-        path: 'tab3',
+        path: 'login',
         loadComponent: () =>
-          import('../../pages/tab3/tab3.page').then((m) => m.Tab3Page),
+          import('../../pages/login/login.page').then((m) => m.LoginPage),
       },
       {
-        path: '',
-        redirectTo: '/tabs/home',
-        pathMatch: 'full',
+        path: 'perfil',
+        loadComponent: () =>
+          import('../../pages/accont/accont.page').then((m) => m.AccontPage),
       },
       {
-        path: 'desc/produto/:id',
-        loadComponent: () => import('../../pages/desc-produto/desc-produto.component').then((m) => m.DescProdutoComponent),
-      },
+        path: 'page',
+        loadChildren: () =>
+          import('../../routes/mobile.routes').then((m) => m.routes),
+      }
     ],
   },
   {
