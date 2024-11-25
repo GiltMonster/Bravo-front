@@ -81,6 +81,22 @@ section {
 
 }
 
+.form-mobile {
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    .btn-mobile{
+      width: 100%;
+    }
+  }
+
+}
+
 @media(prefers-color-scheme: light) {
   .container-login {
     --background: #F1F3F9;
@@ -95,7 +111,7 @@ section {
     --highlight-color-focused: #3c3c3c;
     --highlight-color-invalid: #e02d3c;
     --highlight-color-valid: #08875D;
-    --color	: #000000;
+    --color: #000000;
   }
 }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, Validators, NonNullableFormBuilder } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonButton, IonInput, IonCard, IonIcon, IonToast } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonButton, IonInput, IonCard, IonIcon, IonToast, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
 import { PlatformService } from 'src/app/services/platform.service';
 import { addIcons } from 'ionicons';
 import { closeCircle, lockClosed, lockOpen, mail } from 'ionicons/icons';
@@ -14,11 +14,12 @@ import { Router } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonToast, IonIcon, IonCard, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, ReactiveFormsModule,]
+  imports: [IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonToast, IonIcon, IonCard, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, ReactiveFormsModule,]
 })
 export class LoginPage {
 
   isMobile = this.platformService.isMobile();
+
   msg: Message = { message: '', token: '' };
   isToastOpen: boolean = false;
   isError: boolean = false;
@@ -28,8 +29,6 @@ export class LoginPage {
     email: this.formBuilder.control('', [Validators.required, Validators.email]),
     password: this.formBuilder.control('', [Validators.required]),
   });
-
-
 
   constructor(
     private platformService: PlatformService,
@@ -71,5 +70,8 @@ export class LoginPage {
     this.isToastOpen = isOpen;
   }
 
+  goToRegister() {
+    this.router.navigate(['mobile/tabs/page/register']);
+  }
 
 }
