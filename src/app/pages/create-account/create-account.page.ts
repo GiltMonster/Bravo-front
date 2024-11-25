@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonButton, IonInput, IonIcon, IonCard, IonToast } from '@ionic/angular/standalone';
+import { AbstractControl, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonButton, IonInput, IonIcon, IonCard, IonToast, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
 import { PlatformService } from 'src/app/services/platform.service';
 import { addIcons } from 'ionicons';
 import { closeCircle, idCard, lockClosed, mail, people, save } from 'ionicons/icons';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './create-account.page.html',
   styleUrls: ['./create-account.page.scss'],
   standalone: true,
-  imports: [IonToast, IonCard, IonIcon, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonToast, IonCard, IonIcon, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class CreateAccountPage {
 
@@ -83,7 +83,11 @@ export class CreateAccountPage {
         this.createAccountForms.reset();
         this.isError = false;
         setTimeout(() => {
-          this.router.navigate(['/login']);
+          if (this.isMobile) {
+            this.router.navigate(['mobile/tabs/login']);
+          } else {
+            this.router.navigate(['/login']);
+          }
         }, 3000);
 
       },

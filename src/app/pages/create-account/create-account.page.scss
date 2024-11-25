@@ -43,14 +43,14 @@ section {
         width: 80%;
       }
 
-      p{
+      p {
         a {
           font-weight: bold;
         }
       }
     }
 
-    .container-img{
+    .container-img {
       width: 50%;
       height: 100%;
       display: flex;
@@ -65,7 +65,7 @@ section {
 
     }
 
-    form{
+    form {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -78,22 +78,38 @@ section {
 
 }
 
-ion-input{
+.form-mobile {
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    .btn-mobile {
+      width: 100%;
+    }
+  }
+}
+
+ion-input {
   --border-color: #606060;
   --highlight-color-invalid: #e02d3c;
   --highlight-color-valid: #08875D;
   font-size: large;
 }
-.msg-pessword{
+
+.msg-pessword {
   width: 100%;
   margin: 0;
   text-align: start;
 
-  ion-input{
+  ion-input {
     --padding-bottom: 5px;
   }
 
-  p{
+  p {
     color: #e02d3c;
     font-size: 1.2rem;
     margin: 0 0 20px 0
@@ -101,20 +117,20 @@ ion-input{
 
 }
 
-@media(prefers-color-scheme: light){
-  .container-cadastro{
+@media(prefers-color-scheme: light) {
+  .container-cadastro {
     --background: #F1F3F9;
   }
 
-  h1{
+  h1 {
     color: #3c3c3c;
   }
 
-  ion-input{
+  ion-input {
     --border-color: #606060;
     --highlight-color-focused: #3c3c3c;
     --highlight-color-invalid: #e02d3c;
     --highlight-color-valid: #08875D;
-    --color	: #000000;
+    --color: #000000;
   }
 }
