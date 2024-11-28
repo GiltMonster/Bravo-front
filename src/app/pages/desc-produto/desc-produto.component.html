@@ -6,16 +6,122 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-}
+
 
 <ion-content>
-  @if (isMobile) {
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Descrição do produto</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  @if(isLoaded){
+
+  <div class="container-img-mobile">
+    @if(produto.imagens.length > 0){
+    <img class="img-principal-mobile" [(src)]="produto.imagens[indexImagem].url" alt="Isso é o carro, {{produto.nome}}">
+    @if(produto.imagens.length > 1){
+
+    <div class="select-container-mobile">
+      @for(imagem of produto.imagens; track $index){
+      <img class="img-list-item" [ngClass]="{'selected': $index === indexImagem}" [src]="imagem.url"
+        alt="{{produto.nome}}" (click)="selectImg($index, $event)">
+      }
+    </div>
+    }
+    }@else {
+    <ion-icon class="imgNotFound" color="primary" name="car-sport-outline"></ion-icon>
+    }
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-label>
+          <h1>{{produto.nome}}</h1>
+          <p>{{produto.preco | formatPrice }}</p>
+        </ion-label>
+
+        @if(!produto.indisponivel){
+        <ion-label class="estoque">
+          <ion-icon name="basket-outline" color="primary"></ion-icon>
+          <p>Uni. {{produto.estoque}}</p>
+        </ion-label>
+        }@else{
+        <ion-label color="warning" class="estoque-invalido">
+          <h1>Indisponivel</h1>
+        </ion-label>
+        }
+
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <hr>
+
+      <ion-button fill="outline" shape="round" expand="full" [disabled]="produto.indisponivel"
+        (click)="addCarrinho(produto.id!)">Adicionar ao carrinho
+        <ion-icon slot="end" name="cart-outline" size="large"></ion-icon>
+      </ion-button>
+
+      <ion-label>
+        <p class="descricao">{{produto.descricao}}</p>
+      </ion-label>
+    </ion-card-content>
+
+  </ion-card>
+  }@else {
+
+  <div class="container-img-mobile">
+    <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
+
+    <div class="select-container-mobile">
+      <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" class="skeleton-img-list-item"></ion-skeleton-text>
+    </div>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-label>
+          <h1><ion-skeleton-text animated /></h1>
+          <p><ion-skeleton-text animated /></p>
+        </ion-label>
+        <ion-label>
+          <ion-skeleton-text animated class="estoque-skeleton" />
+        </ion-label>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <hr>
+
+      <ion-button fill="outline" shape="round" disabled expand="full" (click)="addCarrinho(produto.id!)">Adicionar ao
+        carrinho
+        <ion-icon slot="end" name="cart-outline" size="large"></ion-icon>
+      </ion-button>
+
+      <ion-label>
+        <ion-skeleton-text animated class="skeleton-mobile" />
+        <ion-skeleton-text animated class="skeleton-mobile" />
+        <ion-skeleton-text animated class="skeleton-mobile" />
+        <ion-skeleton-text animated class="skeleton-mobile" />
+        <ion-skeleton-text animated class="skeleton-mobile" />
+        <ion-skeleton-text animated class="skeleton-mobile" />
+        <ion-skeleton-text animated class="skeleton-mobile-final" />
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
   }
+
+
+</ion-content>
+}@else {
+
+<ion-content>
   <div class="container">
 
     <div class="container-produto">
@@ -39,7 +145,7 @@
         }
       </div>
 
-      <div class="container-desc" id="container-desc">
+      <div class="container-desc">
         <h1 class="nome">{{produto.nome}}</h1>
         <p class="preco">{{produto.preco | formatPrice }}</p>
         @if(!produto.indisponivel){
@@ -101,10 +207,12 @@
       }
     </div>
 
-    <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
-      positionAnchor="container-desc" position="top" [color]="isError ? 'danger' : 'success'"
-      [icon]="isError ? 'close-circle' : 'bag-add'">
-    </ion-toast>
   </div>
 
 </ion-content>
+
+}
+
+<ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+  [color]="isError ? 'danger' : 'success'" [icon]="isError ? 'close-circle' : 'bag-add'">
+</ion-toast>

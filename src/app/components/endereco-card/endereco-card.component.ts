@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IonCard, IonButton, IonInput } from "@ionic/angular/standalone";
+import { IonCard, IonButton, IonInput, IonCardContent } from "@ionic/angular/standalone";
 import Endereco from 'src/app/interfaces/Endereco';
 import { FormatCEPPipe } from 'src/app/pipes/format-cep.pipe';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PlatformService } from 'src/app/services/platform.service';
 
 @Component({
   selector: 'app-endereco-card',
   templateUrl: './endereco-card.component.html',
   styleUrls: ['./endereco-card.component.scss'],
-  imports: [IonButton, IonCard, IonInput, FormatCEPPipe, FormsModule, ReactiveFormsModule],
+  imports: [IonCardContent, IonButton, IonCard, IonInput, FormatCEPPipe, FormsModule, ReactiveFormsModule],
   standalone: true,
 })
 export class EnderecoCardComponent {
@@ -27,10 +28,12 @@ export class EnderecoCardComponent {
 
   @Output() deleteEndereco = new EventEmitter<any>();
 
+  isMobile: boolean = this.platformService.isMobile();
   editMode: boolean = false;
   enderecoForm: FormGroup;
 
   constructor(
+    private platformService: PlatformService,
     private enderecoService: EnderecoService,
     private fb: FormBuilder
   ) {

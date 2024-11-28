@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonToast, IonIcon, IonCard, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, ReactiveFormsModule,]
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
 
   isMobile = this.platformService.isMobile();
 
@@ -35,7 +35,15 @@ export class LoginPage {
     private authService: AuthLoginService,
     protected formBuilder: NonNullableFormBuilder,
     private router: Router
-  ) { addIcons({ lockClosed, mail, lockOpen, closeCircle }); }
+  ) {
+    addIcons({ lockClosed, mail, lockOpen, closeCircle });
+  }
+
+  ngOnInit(): void {
+    this.authService.verifyToken().subscribe(() => {
+      this.isMobile ? this.router.navigate(['mobile/tabs/perfil']) : this.router.navigate(['/']);
+    });
+  }
 
   login() {
     this.isDisable = false;
@@ -55,7 +63,7 @@ export class LoginPage {
         setTimeout(() => {
           window.location.reload();
         }, 1000);
-        this.router.navigate(['/']);
+        this.isMobile ? this.router.navigate(['mobile/tabs/home']) : this.router.navigate(['/']);
       },
       (error) => {
         this.msg = error.error

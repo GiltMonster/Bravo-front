@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { IonContent, IonLabel, IonHeader, IonToolbar, IonTitle, IonSkeletonText, IonButton, IonIcon, IonToast } from "@ionic/angular/standalone";
+import { IonContent, IonLabel, IonHeader, IonToolbar, IonTitle, IonSkeletonText, IonButton, IonIcon, IonToast, IonCard, IonCardTitle, IonCardHeader, IonCardContent } from "@ionic/angular/standalone";
 import Product from 'src/app/interfaces/Product';
 import { FormatPricePipe } from 'src/app/pipes/format-price.pipe';
 import { ProdutoService } from 'src/app/services/home/produto.service';
@@ -16,7 +16,7 @@ import Message from 'src/app/interfaces/Message';
   selector: 'app-desc-produto',
   templateUrl: './desc-produto.component.html',
   styleUrls: ['./desc-produto.component.scss'],
-  imports: [IonToast, IonIcon, IonButton, IonSkeletonText, IonTitle, IonToolbar, IonHeader, IonLabel, IonContent, CommonModule, RouterModule, FormatPricePipe],
+  imports: [IonCardContent, IonCardHeader, IonCardTitle, IonToast, IonIcon, IonButton, IonSkeletonText, IonTitle, IonToolbar, IonHeader, IonLabel, IonContent, CommonModule, RouterModule, FormatPricePipe, IonCard],
   standalone: true
 })
 export class DescProdutoComponent {
@@ -98,7 +98,7 @@ export class DescProdutoComponent {
         this.msg = error.error
         this.isError = true;
         this.setOpen(true);
-        this.router.navigate(['/login']);
+        this.isMobile ? this.router.navigate(['mobile/tabs/login']) : this.router.navigate(['/login']);
       });
   }
 

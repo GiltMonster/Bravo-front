@@ -1,19 +1,84 @@
-@if (ismobile) {
+@if (isMobile) {
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>pedidos</ion-title>
+    <ion-title>Histórico de pedidos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">pedidos</ion-title>
+      <ion-title size="large">Histórico de pedidos</ion-title>
     </ion-toolbar>
   </ion-header>
+  @if (pedidos.length) {
+
+  @for (pedido of pedidos; track $index) {
+  <ion-card class="card-mobile">
+    <ion-card-header>
+      <ion-card-title class="card-info-header-mobile">
+        <ion-label>
+          <h1>Pedido realizado:</h1>
+          <p>{{ pedido.pedido_info.pedido_data | date }}</p>
+        </ion-label>
+
+        <ion-label>
+          <h1>Total:</h1>
+          <p>{{ calcTotalValorPedido(pedido) | formatPrice }}</p>
+        </ion-label>
+      </ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list class="list-produto-mobile">
+        <ion-item-divider color="primary">
+          <ion-label>Seus itens</ion-label>
+        </ion-item-divider>
+        @for (produto of pedido.pedido_itens; track $index) {
+        <ion-item (click)="goToProduto(produto.produto_id)" lines="full" detail>
+          @if (produto.produto_img) {
+          <ion-thumbnail slot="start">
+            <img src="{{ produto.produto_img }}">
+          </ion-thumbnail>
+          }@else {
+          <ion-icon color="primary" name="car-sport-outline" slot="start"></ion-icon>
+          }
+
+          <ion-label>
+            <h3>{{ produto.produto_nome }}</h3>
+            <p>Qtd: {{ produto.produto_qtd }}</p>
+          </ion-label>
+
+          <ion-note slot="end">
+            <h3>Valor unid:</h3>
+            <p>{{ calcValorUnitario(produto.produto_preco_total, produto.produto_qtd).toString() | formatPrice }}</p>
+          </ion-note>
+
+        </ion-item>
+        }
+      </ion-list>
+    </ion-card-content>
+
+  </ion-card>
+  }
+
+  }@else {
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-label>
+          <h1>Você ainda não realizou nenhum pedido</h1>
+        </ion-label>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  }
+
 </ion-content>
 
-}
+
+}@else {
 
 <ion-content>
   <section class="container">
@@ -39,7 +104,7 @@
         </div>
 
         <ion-card-content>
-          <ion-list>
+          <ion-list class="list-produto">
             @for (produto of pedido.pedido_itens; track $index) {
             <ion-item>
               <ion-thumbnail slot="start">
@@ -52,13 +117,15 @@
 
               <ion-label>
                 <h1>{{ produto.produto_nome }}</h1>
-                <ion-button fill="outline" shape="round" (click)="goToProduto(produto.produto_id)"  color="success">Ver item</ion-button>
+                <ion-button fill="outline" shape="round" (click)="goToProduto(produto.produto_id)" color="success">Ver
+                  item</ion-button>
               </ion-label>
 
 
               <ion-label>
                 <p>Quantidade: {{ produto.produto_qtd }}</p>
-                <p>Valor unitário: {{ calcValorUnitario(produto.produto_preco_total, produto.produto_qtd).toString() | formatPrice }}</p>
+                <p>Valor unitário: {{ calcValorUnitario(produto.produto_preco_total, produto.produto_qtd).toString() |
+                  formatPrice }}</p>
               </ion-label>
 
             </ion-item>
@@ -71,3 +138,5 @@
     </ion-list>
   </section>
 </ion-content>
+
+}

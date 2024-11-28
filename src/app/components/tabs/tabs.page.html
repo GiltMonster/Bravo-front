@@ -9,6 +9,9 @@
     <ion-tab-button tab="carrinho" href="/tabs/page/carrinho">
       <ion-icon aria-hidden="true" name="bag"></ion-icon>
       <ion-label>Carrinho</ion-label>
+      @if(itensLength > 0){
+        <ion-badge>{{itensLength}}</ion-badge>
+      }
     </ion-tab-button>
 
     <ion-tab-button tab="perfil" href="/tabs/tab3">
@@ -18,7 +21,8 @@
     }@else {
     <ion-tab-button tab="carrinho" href="/" disabled="true">
       <ion-icon aria-hidden="true" name="bag"></ion-icon>
-      <ion-label>Carrinho</ion-label>
+      <ion-label>Carrinho
+      </ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="login" href="/tabs/login">

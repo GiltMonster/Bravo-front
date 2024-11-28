@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonList, IonCard, IonCardContent, IonItem, IonThumbnail, IonIcon, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonList, IonCard, IonCardContent, IonItem, IonThumbnail, IonIcon, IonButton, IonCardHeader, IonCardTitle, IonItemDivider, IonNote } from '@ionic/angular/standalone';
 import { PlatformService } from 'src/app/services/platform.service';
 import { AuthLoginService } from 'src/app/services/auth/auth-login.service';
 import { Router } from '@angular/router';
@@ -17,11 +17,11 @@ import { carSportOutline } from 'ionicons/icons';
   templateUrl: './pedidos.page.html',
   styleUrls: ['./pedidos.page.scss'],
   standalone: true,
-  imports: [IonButton, IonIcon, IonThumbnail, IonItem, IonCardContent, IonCard, IonList, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, FormatPricePipe]
+  imports: [IonNote, IonItemDivider, IonCardTitle, IonCardHeader, IonButton, IonIcon, IonThumbnail, IonItem, IonCardContent, IonCard, IonList, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, FormatPricePipe]
 })
 export class PedidosPage implements OnInit {
 
-  ismobile = this.platformService.isMobile();
+  isMobile = this.platformService.isMobile();
   usuario = {} as User;
   pedidos: Pedido[] = [];
 
@@ -78,7 +78,7 @@ export class PedidosPage implements OnInit {
   }
 
   goToProduto(produto_id: number) {
-    this.router.navigate(['/desc/produto', produto_id]);
+    this.isMobile ? this.router.navigate(['mobile/tabs/page/produto', produto_id]) : this.router.navigate(['/desc/produto', produto_id]);
   }
 
 }

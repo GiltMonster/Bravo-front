@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCheckbox, IonToast, IonSkeletonText, IonIcon, IonInput, IonItemDivider, IonItemGroup, IonRadioGroup, IonRadio } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCheckbox, IonToast, IonSkeletonText, IonIcon, IonInput, IonItemDivider, IonItemGroup, IonRadioGroup, IonRadio, IonItemOptions, IonItemOption, IonItemSliding, IonAccordionGroup, IonAccordion, IonNote, IonProgressBar } from '@ionic/angular/standalone';
 import { PlatformService } from 'src/app/services/platform.service';
 import { CarrinhoService } from 'src/app/services/produto/carrinho.service';
 import { AuthLoginService } from 'src/app/services/auth/auth-login.service';
@@ -22,18 +22,23 @@ import { PedidoService } from 'src/app/services/produto/pedido.service';
   templateUrl: './carrinho.page.html',
   styleUrls: ['./carrinho.page.scss'],
   standalone: true,
-  imports: [IonRadio, IonRadioGroup, IonItemGroup, IonItemDivider, IonInput, IonIcon, IonSkeletonText, IonToast, IonCheckbox,
-    IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButton, IonLabel, IonItem,
-    IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, FormatPricePipe, FormatCEPPipe
+  imports: [IonProgressBar, IonNote, IonAccordion, IonAccordionGroup, IonItemSliding, IonItemOption, IonItemOptions, IonRadio, IonRadioGroup, IonItemGroup, IonItemDivider, IonInput, IonIcon, IonSkeletonText, IonToast, IonCheckbox,
+    IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonButton, IonLabel, IonItem, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, FormatPricePipe, FormatCEPPipe
   ]
 })
+
 export class CarrinhoPage implements OnInit {
 
   allSelected: boolean = false;
   isMobile = this.platformService.isMobile();
+  isLoaded: boolean = false;
   editMode: boolean = false;
   idProdutoEdit: number = 0;
-  anyItemChecked: boolean = false;
+
+  anyEnderecoChecked: boolean = true;
+
+  trilha = ['endereco', 'itensCarrinho', 'finalizarCompra'];
+  trilhaIndex = 0;
 
   msg: Message = { message: '', usuario: '' };
   isToastOpen: boolean = false;
@@ -73,9 +78,13 @@ export class CarrinhoPage implements OnInit {
         this.usuario = response;
       },
       (error) => {
-        this.router.navigate(['/login']);
+        this.isMobile ? this.router.navigate(['/mobile/tabs/login']) : this.router.navigate(['/login']);
       }
     );
+  }
+
+  toggleTrilha(index: number) {
+    this.trilhaIndex = index;
   }
 
   setOpen(isOpen: boolean) {
@@ -83,8 +92,12 @@ export class CarrinhoPage implements OnInit {
   }
 
   goto(id_produto: number) {
-    this.isMobile ? this.router.navigate(['/mobile/tabs/desc/produto/', id_produto]) : this.router.navigate(['/desc/produto/', id_produto]);
+    this.isMobile ? this.router.navigate(['/mobile/tabs/page/produto/', id_produto]) : this.router.navigate(['/desc/produto/', id_produto]);
 
+  }
+
+  goToEndereco() {
+    this.router.navigate(['/mobile/tabs/page/enderecos']);
   }
 
   removerItem(produto_id: number, needMessage: boolean = true) {
@@ -121,6 +134,13 @@ export class CarrinhoPage implements OnInit {
       }
     });
 
+    if (Object.keys(produtos_ids_qtd).length === 0) {
+      this.msg = { message: 'Selecione ao menos um item para finalizar a compra!!', usuario: '' };
+      this.isError = true;
+      this.setOpen(true);
+      return;
+    }
+
     let compra = {
       "usario_id": this.usuario.id!,
       "endereco_id": this.idEnderecoSelecionado,
@@ -145,9 +165,12 @@ export class CarrinhoPage implements OnInit {
   }
 
   getItensCarrinho(id_user: string) {
+    this.isLoaded = true;
     this.carrinhoService.listaCarrinho(id_user).subscribe((response) => {
       this.itensCarrinho = response;
+      this.isLoaded = false;
     }, (error) => {
+      this.isLoaded = false;
       this.msg = error.error
       this.isError = true;
       this.setOpen(true);
@@ -155,9 +178,12 @@ export class CarrinhoPage implements OnInit {
   }
 
   getEnderecos(id_user: string) {
+    this.isLoaded = true;
     this.enderecoService.getListEndereco(id_user).subscribe((response) => {
       this.enderecos = response;
+      this.isLoaded = false;
     }, (error) => {
+      this.isLoaded = false;
       this.msg = error.error
       this.isError = true;
       this.setOpen(true);
@@ -195,9 +221,9 @@ export class CarrinhoPage implements OnInit {
   }
 
   handleChange(ev: any) {
-    console.log('Current value:', JSON.stringify(ev.target.value));
     this.idEnderecoSelecionado = ev.target.value;
-    console.log(this.idEnderecoSelecionado);
+    this.anyEnderecoChecked = false;
+    this.toggleTrilha(1);
 
   }
 
@@ -210,6 +236,7 @@ export class CarrinhoPage implements OnInit {
       this.setOpen(true);
       return;
     }
+
 
     this.carrinhoService.editCartItem(item.id_produto, parseInt(newStock), this.usuario.id!).subscribe((response) => {
       this.msg = response;

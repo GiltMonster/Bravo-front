@@ -1,25 +1,180 @@
 @if (isMobile) {
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>carrinho</ion-title>
+    <ion-title>Carrinho</ion-title>
   </ion-toolbar>
+  @if(isLoaded){
+  <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  }
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">carrinho</ion-title>
+      <ion-title size="large">Carrinho</ion-title>
     </ion-toolbar>
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
   </ion-header>
+
+  <ion-card class="card-mobile">
+    <ion-card-header>
+      <ion-card-title>
+        @if (usuario.name) {
+        <ion-label>
+          <h1>
+            Olá {{usuario.name}}, seu carrinho:
+          </h1>
+        </ion-label>
+        }@else {
+        Olá <ion-skeleton-text animated></ion-skeleton-text>, seu carrinho:
+        }
+      </ion-card-title>
+      <ion-card-subtitle>
+        <ion-label>
+          <p>
+            Aqui voce pode encontrar seus futuros produtos
+          </p>
+        </ion-label>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    @if(itensCarrinho.length){
+    <ion-accordion-group [value]="trilha[trilhaIndex]">
+      <ion-accordion value="endereco">
+
+        <ion-item slot="header" color="danger">
+          <ion-label>Selecione um Endereço:</ion-label>
+        </ion-item>
+
+        @if (enderecos.length) {
+
+        <ion-radio-group (ionChange)="handleChange($event)" slot="content">
+          @for (endereco of enderecos; track endereco.id) {
+          <ion-item lines="full" button>
+            <ion-radio [value]="endereco.id" aria-label="Seleciona o endereco desejado para entrega" slot="start">
+            </ion-radio>
+
+            <ion-label>
+              <h3>{{endereco.nome}}, {{endereco.cep | formatCEP}}</h3>
+              <p>{{endereco.logradouro}}, {{endereco.numero}}</p>
+            </ion-label>
+
+            <ion-note>
+              <p>{{endereco.cidade}}, {{endereco.estado}}</p>
+            </ion-note>
+          </ion-item>
+          }
+        </ion-radio-group>
+        }@else {
+        <ion-list slot="content">
+          <ion-item >
+            <ion-label>
+              <h1>Nenhum endereço cadastrado, para concluir o pedido.</h1>
+              <p>Um endereço é necessário? Clique no botão abaixo para cadastrar um novo</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-button (click)="goToEndereco()" shape="round" expand="full">Cadastrar Endereço</ion-button>
+        </ion-list>
+        }
+
+      </ion-accordion>
+      <ion-accordion value="itensCarrinho">
+        <ion-item slot="header" color="danger">
+          <ion-label>Produtos</ion-label>
+        </ion-item>
+
+        <ion-item-group slot="content">
+
+          <ion-item-divider color="primary">
+            <ion-label slot="start">
+              <ion-checkbox color="danger" labelPlacement="end"
+                aria-label="Adicionado todos os produtos a sacola de produtos" (click)="selecionarTodos()" slot="start">
+                Marcar todos os produtos!
+              </ion-checkbox>
+            </ion-label>
+          </ion-item-divider>
+
+          @for(item of itensCarrinho; track item.id_produto){
+
+          <ion-item-sliding>
+            <ion-item>
+              <ion-checkbox slot="start" aria-label="Adicionado a sacola de produtos"
+                [(ngModel)]="item.selecionado"></ion-checkbox>
+
+              @if (editMode && item.id_produto === idProdutoEdit) {
+              <ion-input type="number" fill="solid" label="Uni. estoque" labelPlacement="floating" min="1"
+                [(ngModel)]="item.quantidade">
+                <ion-icon slot="start" name="file-tray" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+              }@else {
+              <ion-label (click)="goto(item.id_produto)">
+                <h3>{{item.nome}}</h3>
+                <p>Uni. {{item.quantidade}}</p>
+              </ion-label>
+              }
+
+              <ion-label>
+                <h3>{{item.preco | formatPrice}}</h3>
+                <p>- {{item.desconto | formatPrice}}</p>
+              </ion-label>
+
+              <ion-note>
+                <h6>Total:</h6>
+                <p>{{getTotalUnidade(item) | formatPrice }}</p>
+              </ion-note>
+            </ion-item>
+
+            <ion-item-options>
+
+              @if (editMode && item.id_produto === idProdutoEdit) {
+              <ion-item-option (click)="saveStock(item.quantidade, item)" color="success">
+                <ion-icon slot="icon-only" name="save" aria-hidden="true"></ion-icon>
+              </ion-item-option>
+              }@else{
+              <ion-item-option (click)="toggleMode(item.id_produto)">
+                <ion-icon slot="icon-only" name="pencil" aria-hidden="true"></ion-icon>
+              </ion-item-option>
+
+              }
+              <ion-item-option (click)="removerItem(item.id_produto)">
+                <ion-icon slot="icon-only" name="trash" aria-hidden="true"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        }
+
+
+        <ion-button (click)="finalizarCompra()" shape="round" [disabled]="enderecos.length === 0 || itensCarrinho.length === 0 || anyEnderecoChecked " expand="full">Finalizar Compra</ion-button>
+
+        </ion-item-group>
+      </ion-accordion>
+
+    </ion-accordion-group>
+
+    <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+      position="bottom" [color]="isError ? 'danger' : 'success'"
+      [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
+
+    }@else {
+    <ion-item>
+      <ion-label>Nenhum item no carrinho</ion-label>
+    </ion-item>
+    }
+
+  </ion-card>
+
 </ion-content>
 
-}
+}@else {
 
 <ion-content>
 
   <section class="container">
 
-    <ion-card>
+    <ion-card id="carrinho">
 
       <ion-card-header>
         @if (usuario.name) {
@@ -27,9 +182,7 @@
           <ion-label>
             Olá {{usuario.name}}, seu carrinho:
           </ion-label>
-
         </ion-card-title>
-
 
         }@else {
         <ion-card-title>
@@ -100,10 +253,10 @@
               [(ngModel)]="item.selecionado"></ion-checkbox>
 
             @if (editMode && item.id_produto === idProdutoEdit) {
-              <ion-input type="number" fill="solid" label="Uni. estoque" labelPlacement="floating"
-                [(ngModel)]="item.quantidade">
-                <ion-icon slot="start" name="file-tray" aria-hidden="true"></ion-icon>
-              </ion-input>
+            <ion-input type="number" fill="solid" label="Uni. estoque" labelPlacement="floating"
+              [(ngModel)]="item.quantidade">
+              <ion-icon slot="start" name="file-tray" aria-hidden="true"></ion-icon>
+            </ion-input>
 
             }@else {
             <ion-label (click)="goto(item.id_produto)">
@@ -137,7 +290,7 @@
           </ion-item>
           }
           <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
-            positionAnchor="form" position="bottom" [color]="isError ? 'danger' : 'success'"
+            positionAnchor="carrinho" position="bottom" [color]="isError ? 'danger' : 'success'"
             [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
         </ion-item-group>
         }@else {
@@ -150,6 +303,9 @@
       </ion-list>
     </ion-card>
 
-    <ion-button (click)="finalizarCompra()" shape="round" [disabled]="!itensCarrinho.length && !anyItemChecked" size="large">Finalizar Compra</ion-button>
+    <ion-button (click)="finalizarCompra()" shape="round" [disabled]="!itensCarrinho.length && !anyEnderecoChecked"
+      size="large">Finalizar Compra</ion-button>
   </section>
 </ion-content>
+
+}

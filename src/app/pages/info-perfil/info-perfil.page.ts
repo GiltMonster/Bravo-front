@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonIcon, IonCard, IonToast, IonButton, IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonIcon, IonCard, IonToast, IonButton, IonInput, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
 import { PlatformService } from 'src/app/services/platform.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/interfaces/User';
@@ -16,7 +16,7 @@ import { AuthLoginService } from 'src/app/services/auth/auth-login.service';
   templateUrl: './info-perfil.page.html',
   styleUrls: ['./info-perfil.page.scss'],
   standalone: true,
-  imports: [IonToast, IonCard, IonIcon, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonToast, IonCard, IonIcon, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class InfoPerfilPage implements OnInit {
 
@@ -54,13 +54,18 @@ export class InfoPerfilPage implements OnInit {
     addIcons({ lockClosed, mail, people, idCard, save, closeCircle });
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.authService.verifyToken().subscribe(
       (response) => {
         this.getUser(response.id!);
       }, (error) => {
-        this.router.navigate(['/login']);
-      });
+        this.isMobile ? this.router.navigate(['mobile/tabs/login']) : this.router.navigate(['/login']);
+      }
+    );
+  }
+
+  ngOnInit() {
+    this.ionViewWillEnter();
   }
 
   passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -143,7 +148,7 @@ export class InfoPerfilPage implements OnInit {
 
   cancel() {
     this.updateAccountForms.reset();
-    this.router.navigate(['/perfil']);
+    this.isMobile ? this.router.navigate(['mobile/tabs/perfil']) : this.router.navigate(['/perfil']);
   }
 
 }

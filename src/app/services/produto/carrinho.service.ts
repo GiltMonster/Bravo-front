@@ -20,9 +20,6 @@ export class CarrinhoService {
   listaCarrinho(id_user: string): Observable<Item_carrinho[]> {
     return this.http.get<Item_carrinho[]>(`${environment.API_URL_CARRINHO}/${id_user}`).pipe(
       tap(items => {
-        if (items.length === 1) {
-          this.itensLengthSource.next(0);
-        }
         this.itensLengthSource.next(items.length);
       })
     );

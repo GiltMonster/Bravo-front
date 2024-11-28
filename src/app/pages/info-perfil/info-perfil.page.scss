@@ -78,6 +78,25 @@ ion-input{
 gap: 20px;
 }
 
+.form-mobile {
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .btn-mobile{
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+
+}
+
 .msg-pessword{
   width: 100%;
   margin: 0;

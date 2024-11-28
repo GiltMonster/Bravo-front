@@ -1,21 +1,89 @@
 @if(isMobile){
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>infoPerfil</ion-title>
+    <ion-title>Seus dados</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">infoPerfil</ion-title>
+      <ion-title size="large">Seus dados</ion-title>
     </ion-toolbar>
   </ion-header>
+
+
+  <ion-card class="container-atualizar-cadastro-mobile">
+    <ion-card-header>
+      <ion-card-title>Atualize seus dados:</ion-card-title>
+      <ion-card-subtitle>Você pode atualizar seus dados a qualquer momento.</ion-card-subtitle>
+      <hr>
+    </ion-card-header>
+
+    <ion-card-content class="form-mobile" id="form">
+
+      <form [formGroup]="updateAccountForms">
+
+        <ion-input type="name" fill="solid" label="Nome" labelPlacement="floating" name formControlName="name" helperText="Digite um nome, para nos referirmos a você"
+          [value]="user.name">
+          <ion-icon slot="start" name="people" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+        <ion-input type="name" fill="solid" label="CPF" labelPlacement="floating" formControlName="cpf" maxlength="14" helperText="Digite um cpf valido"
+          [value]="user.cpf" (ionInput)="applyCpfMask($event)">
+          <ion-icon slot="start" name="id-card" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+        <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" [value]="user.email"
+          helperText="Digite um email valido" errorText="E-mail invalido" email formControlName="email">
+          <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+        <hr>
+
+        <ion-input type="password" fill="solid" label="Senha atual" labelPlacement="floating"
+          errorText="Digite uma senha" formControlName="currentPassword" password>
+          <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+        <hr>
+
+        <ion-input type="password" fill="solid" label="Sua nova senha" labelPlacement="floating"
+          errorText="Digite uma senha" formControlName="password" password>
+          <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+
+        <div class="msg-pessword">
+          <ion-input type="password" fill="solid" label="Confirme sua nova senha" labelPlacement="floating"
+            errorText="Digite uma senha" formControlName="confirmPassword" password>
+            <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          @if(updateAccountForms.errors?.['passwordsMismatch'] &&
+          updateAccountForms.get('confirmPassword')?.touched){
+          <p>As senhas não coincidem!!!</p>
+          }
+        </div>
+
+        <div class="btn-mobile">
+          <ion-button fill="outline" shape="round" color="primary" (click)="cancel()" expand="full">Cancelar</ion-button>
+
+          <ion-button fill="outline" shape="round" color="success" (click)="updateAccount()" expand="full"
+            [disabled]="!updateAccountForms.valid || !isDisable">Atualizar</ion-button>
+        </div>
+
+        <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+          positionAnchor="form" position="top" [color]="isError ? 'danger' : 'success'"
+          [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
 
-}
-
-
+}@else {
 <ion-content>
 
   <section class="container">
@@ -46,8 +114,8 @@
 
           <hr>
 
-          <ion-input type="password" fill="solid" label="Senha atual" labelPlacement="floating" errorText="Digite uma senha"
-            formControlName="currentPassword" password>
+          <ion-input type="password" fill="solid" label="Senha atual" labelPlacement="floating"
+            errorText="Digite uma senha" formControlName="currentPassword" password>
             <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
           </ion-input>
 
@@ -83,10 +151,11 @@
             positionAnchor="form" position="top" [color]="isError ? 'danger' : 'success'"
             [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
 
-
         </form>
       </div>
     </ion-card>
   </section>
 
 </ion-content>
+
+}

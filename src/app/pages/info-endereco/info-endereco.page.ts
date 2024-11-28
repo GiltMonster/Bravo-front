@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonLabel, IonIcon, IonButton, IonToast, IonInput, IonText } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonLabel, IonIcon, IonButton, IonToast, IonInput, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonList, IonItem, IonItemDivider, IonAccordion, IonAccordionGroup } from '@ionic/angular/standalone';
 import { PlatformService } from 'src/app/services/platform.service';
 import { AuthLoginService } from 'src/app/services/auth/auth-login.service';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { closeCircle, home, information, location, map, save } from 'ionicons/icons';
+import { closeCircle, home, location, map, save } from 'ionicons/icons';
 import { User } from 'src/app/interfaces/User';
 import Message from 'src/app/interfaces/Message';
 import Endereco from 'src/app/interfaces/Endereco';
@@ -18,7 +18,7 @@ import { EnderecoCardComponent } from "../../components/endereco-card/endereco-c
   templateUrl: './info-endereco.page.html',
   styleUrls: ['./info-endereco.page.scss'],
   standalone: true,
-  imports: [IonText, IonInput, IonToast, IonButton, IonIcon, IonLabel, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule, EnderecoCardComponent]
+  imports: [IonAccordionGroup, IonAccordion, IonItemDivider, IonItem, IonList, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonInput, IonToast, IonButton, IonIcon, IonLabel, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule, EnderecoCardComponent]
 })
 export class InfoEnderecoPage implements OnInit {
 
