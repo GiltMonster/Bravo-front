@@ -18,14 +18,47 @@
   }
 
   <div class="container">
-    <app-pesquisa [categories]="categoriesWithProducts" [isLoaded]="isLoaded" (namesCategorys)="updateCategories($event)"></app-pesquisa>
+    <app-pesquisa [categories]="categoriesWithProducts" [isLoaded]="isLoaded"
+      (namesCategorys)="updateCategories($event)" (searchedProducts)="updateCategories($event)"
+      (cancelar)="cancelarPesquisa()"></app-pesquisa>
   </div>
 
+  @if (categoriesWithProducts) {
   <div class="container">
     <app-card [categories]="categoriesWithProducts" [isLoaded]="isLoaded"></app-card>
   </div>
+  }
+
+  @if (categoriesWithProducts.length === 0) {
 
   @if (!isMobile) {
-    <app-footer></app-footer>
+  <div class="container-nops">
+    <div class="nops">
+      <img src="../../../assets/broderSemitem.svg" alt="Um cara perdidão">
+
+        <h1>Caramba você foi muito longe nas suas pesquisa!</h1>
+        <p>Infelizmente não acho que você vá encontrar um produto igual a esse, mas se quiser tentar novamente, fique a
+          vontade!</p>
+
+    </div>
+  </div>
+  } @else {
+    <div class="container-nops-mobile">
+      <div class="nops-mobile">
+        <img src="../../../assets/broderSemitem.svg" alt="Um cara perdidão">
+        <ion-label>
+          <h1>Caramba você foi muito longe nas suas pesquisa!</h1>
+          <p>Infelizmente não acho que você vá encontrar um produto igual a esse, mas se quiser tentar novamente, fique a vontade!</p>
+        </ion-label>
+      </div>
+    </div>
+  }
+  }
+
+
+  @if (!isMobile) {
+
+  <app-footer></app-footer>
+
   }
 </ion-content>

@@ -1,9 +1,15 @@
 <div [class]="styleSearchbarContainer">
 
   <div class="searchbar-container">
-    <!-- <ion-searchbar show-clear-button="focus" placeholder="Pesquisar" class="custom"></ion-searchbar> -->
-    <ion-input label="Pesquisa" label-placement="floating" fill="outline" errorText="Campo obrigatório"
-      placeholder="Digite o nome de um carro"></ion-input>
+
+
+    <ion-input label="Buscando um carro?" label-placement="floating" fill="outline"
+      placeholder="Aqui tem que vir o carro dos seus sonhos" [debounce]="1000" (ionInput)="handleInput($event)"
+      (ionFocus)="handleFocus()" [(ngModel)]="txtSearch" color="primary"></ion-input>
+
+    @if(isFocused && !isMobile){
+    <ion-button fill="outline" slot="end" shape="round" (click)="handleClear()">Cancelar</ion-button>
+    }
 
     @if(isMobile){
 
@@ -11,17 +17,24 @@
     <ion-select class="mobile" placeholder="Categorias" [(ngModel)]="categoriesSelected"
       (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()" multiple
       color="primary">
+      @if(categories.length > 0){
       @for(categorie of categories; track categorie.id){
       <ion-select-option [value]="categorie.nome">{{categorie.nome}}</ion-select-option>
+      }}@else {
+      <ion-select-option value="Nenhuma categoria encontrada" disabled>Nenhuma categoria encontrada</ion-select-option>
       }
     </ion-select>
     }@else {
     <ion-select interface="popover" placeholder="Selecione uma categoria" shape="round" [(ngModel)]="categoriesSelected"
       (ionChange)="handleChange($event.detail)" (ionCancel)="handleCancel()" (ionDismiss)="handleDismiss()" multiple
       color="primary">
+      @if(categories.length > 0){
       @for(categorie of categories; track categorie.id){
       <ion-select-option [value]="categorie.nome">{{categorie.nome}}</ion-select-option>
+      }}@else {
+      <ion-select-option value="Nenhuma categoria encontrada" disabled>Nenhuma categoria encontrada</ion-select-option>
       }
+
     </ion-select>
     }
 

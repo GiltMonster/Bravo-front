@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'Bravo-front',
+  appId: 'io.ionic.bravo',
+  appName: 'Bravo',
   webDir: 'www'
 };
 

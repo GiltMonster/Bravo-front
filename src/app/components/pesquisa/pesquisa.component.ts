@@ -1,35 +1,61 @@
-import { Component, EventEmitter, Input, Output,  } from '@angular/core';
+import { Component, EventEmitter, Input, Output, } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonSearchbar, IonList, IonItem, IonSelect, IonSelectOption, IonInfiniteScroll, IonInfiniteScrollContent, IonContent, IonChip, IonButton, IonInput } from "@ionic/angular/standalone";
+import { IonSearchbar, IonSelect, IonSelectOption, IonChip, IonInput, IonButton, IonIcon } from "@ionic/angular/standalone";
 import Category from 'src/app/interfaces/Category';
+import { ProdutoService } from 'src/app/services/home/produto.service';
 import { PlatformService } from 'src/app/services/platform.service';
 
 @Component({
   selector: 'app-pesquisa',
   templateUrl: './pesquisa.component.html',
   styleUrls: ['./pesquisa.component.scss'],
-  imports: [IonInput, IonChip, IonSelect, IonSelectOption, FormsModule],
+  imports: [IonButton, IonInput, IonChip, IonSelect, IonSelectOption, FormsModule],
   standalone: true,
 })
 export class PesquisaComponent {
 
-  isMobile: boolean;
+  isMobile: boolean = this.platformService.isMobile();
   btnUpdate: boolean = false;
   styleSearchbarContainer: string = "searchbar-content";
+
+  isFocused: boolean = false;
+
+  txtSearch: string = '';
 
   @Input() categories: Category[] = [];
   @Input() isLoaded: boolean = false;
   @Output() namesCategorys: EventEmitter<string[]> = new EventEmitter();
+  @Output() searchedProducts: EventEmitter<Category[]> = new EventEmitter();
+
+  @Output() cancelar: EventEmitter<any> = new EventEmitter();
+
 
   categoriesSelected: string[] = [];
 
   constructor(
-    platformService: PlatformService
+    private platformService: PlatformService,
+    private productService: ProdutoService
   ) {
-    this.isMobile = platformService.isMobile();
+
     if (this.isMobile) {
       this.styleSearchbarContainer = 'searchbar-content-mobile';
     }
+  }
+
+  handleFocus() {
+    this.isFocused = true;
+  }
+
+  handleClear() {
+    this.txtSearch = '';
+    this.isFocused = false;
+    this.cancelar.emit();
+  }
+
+  handleInput(event: any) {
+    this.productService.getProductsByNames(event.target.value).subscribe((data) => {
+      this.searchedProducts.emit(data);
+    });
   }
 
   removeCategory(categorie: string) {
@@ -40,8 +66,8 @@ export class PesquisaComponent {
   }
 
   handleChange({ value }: any) {
-      this.categoriesSelected = value; // Atualiza a lista de categorias selecionadas
-      this.btnUpdate = true;
+    this.categoriesSelected = value; // Atualiza a lista de categorias selecionadas
+    this.btnUpdate = true;
 
   }
 

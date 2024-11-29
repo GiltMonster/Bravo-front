@@ -18,6 +18,11 @@ export class ProdutoService {
     return this.http.get<Category[]>(environment.API_URL_PRODUCTS);
   }
 
+  getProductsByNames(names: string) {
+    return this.http.get<Category[]>(`${environment.API_URL_SEARCH_PRODUCTS}/${names}`);
+  }
+
+
   getProductById(id: string) {
     return this.http.get<Product>(`${environment.API_URL_PRODUCTS}/${id}`);
   }
