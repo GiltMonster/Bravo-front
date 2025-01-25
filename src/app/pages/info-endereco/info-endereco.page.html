@@ -1,0 +1,198 @@
+@if(isMobile){
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Endereços</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Endereços</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-accordion-group value="first">
+    <ion-accordion value="first">
+      <ion-item slot="header" color="danger">
+        <ion-label>Cadastre um novo endereço:</ion-label>
+      </ion-item>
+
+      <ion-item lines="full" slot="content">
+
+        <ion-card class="container-endereco">
+          <ion-card-header>
+            <ion-card-title>Adicionar endereço:</ion-card-title>
+            <ion-card-subtitle>Você pode atualizar seus dados a qualquer momento.</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class="form-mobile">
+
+            <form [formGroup]="registerAddressForms" id="form-adress">
+
+              <ion-input type="name" fill="solid" label="Nome do endereço" labelPlacement="floating" name
+                helperText="Digite um nome valido" errorText="Nome invalido" formControlName="nomeEndereco">
+                <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+              <ion-input type="name" fill="solid" label="CEP" labelPlacement="floating" name formControlName="cep"
+                helperText="Digite um CEP valido" errorText="CEP invalido" maxlength="9"
+                (ionInput)="applyCepMask($event)" (focusout)="searchCep()">
+                <ion-icon slot="start" name="location" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+              <ion-input type="name" fill="solid" label="Cidade" labelPlacement="floating" name
+                helperText="Digite uma cidade valida" errorText="Cidade invalida" formControlName="cidade">
+                <ion-icon slot="start" name="home" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+              <ion-input type="name" fill="solid" label="Estado" labelPlacement="floating" name
+                helperText="Digite um estado valido" errorText="Estado invalido" formControlName="estado">
+                <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+              <ion-input type="name" fill="solid" label="Numero" labelPlacement="floating" name
+                helperText="Digite um numero valido" errorText="Numero invalido" formControlName="numero">
+                <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+              <ion-input type="name" fill="solid" label="Logradouro" labelPlacement="floating" name
+                helperText="Digite um logradouro valido" errorText="Logradouro invalido" formControlName="logradouro">
+                <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+              <ion-input type="name" fill="solid" label="Complemento" labelPlacement="floating" name
+                helperText="Digite um complemento valido" errorText="Complemento invalido"
+                formControlName="complemento">
+                <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+              </ion-input>
+
+              <hr>
+
+              <ion-button fill="outline" shape="round" color="success" (click)="saveAddress()" class="btn-mobile"
+                size="large" [disabled]="!registerAddressForms.valid || !isDisable">Salvar endereço</ion-button>
+
+              <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+                positionAnchor="form-adress" position="top" [color]="isError ? 'danger' : 'success'"
+                [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
+
+            </form>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-item>
+    </ion-accordion>
+
+    <ion-item-divider color="primary">
+      <ion-label>
+        Endereços salvos: {{listEndereco.length}}
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-accordion value="second" [disabled]="!listEndereco.length">
+      <ion-item slot="header" color="danger">
+        <ion-label>Lista de endereços</ion-label>
+      </ion-item>
+
+      <ion-list slot="content">
+
+        @for(endereco of listEndereco; track endereco.id){
+        <ion-item lines="full">
+          <app-endereco-card [endereco]="endereco" (deleteEndereco)="deleteEnderecoById($event)" />
+        </ion-item>
+        <!-- <app-endereco-card [endereco]="endereco" (deleteEndereco)="deleteEnderecoById($event)" /> -->
+        }
+      </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
+
+</ion-content>
+
+}@else {
+
+<ion-content>
+  <section class="container">
+    <ion-card class="container-endereco">
+      <div class="form">
+        <ion-label>
+          <h1>Adicionar endereço:</h1>
+        </ion-label>
+
+        <form [formGroup]="registerAddressForms" id="form">
+
+          <ion-input type="name" fill="solid" label="Nome do endereço" labelPlacement="floating" name
+            helperText="Digite um nome valido" errorText="Nome invalido" formControlName="nomeEndereco">
+            <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <hr>
+
+          <ion-input type="name" fill="solid" label="CEP" labelPlacement="floating" name formControlName="cep"
+            helperText="Digite um CEP valido" errorText="CEP invalido" maxlength="9" (ionInput)="applyCepMask($event)"
+            (focusout)="searchCep()">
+            <ion-icon slot="start" name="location" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <hr>
+
+          <div class="endereco-container">
+
+            <ion-input type="name" fill="solid" label="Cidade" labelPlacement="floating" name
+              helperText="Digite uma cidade valida" errorText="Cidade invalida" formControlName="cidade">
+              <ion-icon slot="start" name="home" aria-hidden="true"></ion-icon>
+            </ion-input>
+
+            <ion-input type="name" fill="solid" label="Estado" labelPlacement="floating" name
+              helperText="Digite um estado valido" errorText="Estado invalido" formControlName="estado">
+              <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+            </ion-input>
+
+          </div>
+
+          <ion-input type="name" fill="solid" label="Numero" labelPlacement="floating" name
+            helperText="Digite um numero valido" errorText="Numero invalido" formControlName="numero">
+            <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input type="name" fill="solid" label="Logradouro" labelPlacement="floating" name
+            helperText="Digite um logradouro valido" errorText="Logradouro invalido" formControlName="logradouro">
+            <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input type="name" fill="solid" label="Complemento" labelPlacement="floating" name
+            helperText="Digite um complemento valido" errorText="Complemento invalido" formControlName="complemento">
+            <ion-icon slot="start" name="map" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <hr>
+
+          <ion-button fill="outline" shape="round" color="success" (click)="saveAddress()" size="large"
+            [disabled]="!registerAddressForms.valid || !isDisable">Salvar endereço</ion-button>
+
+          <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+            positionAnchor="form" position="top" [color]="isError ? 'danger' : 'success'"
+            [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
+
+
+        </form>
+      </div>
+    </ion-card>
+
+    <hr class="divider">
+
+    <div class="container-enderecos-salvos">
+      <ion-label>
+        <h1>Endereços salvos:</h1>
+      </ion-label>
+
+      <div class="container-enderecos">
+
+        @for(endereco of listEndereco; track endereco.id){
+        <app-endereco-card [endereco]="endereco" (deleteEndereco)="deleteEnderecoById($event)" />
+        }
+      </div>
+    </div>
+  </section>
+
+</ion-content>
+}

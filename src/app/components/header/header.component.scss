@@ -12,6 +12,7 @@ ion-header {
       img {
         width: 200px;
         height: auto;
+        cursor: pointer;
       }
 
       .buttons-container {
@@ -20,4 +21,8 @@ ion-header {
       }
     }
   }
+}
+
+.btn-badge{
+  margin-left: 10px;
 }

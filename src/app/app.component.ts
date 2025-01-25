@@ -12,17 +12,12 @@ import { HeaderComponent } from "./components/header/header.component";
 })
 export class AppComponent {
 
-  isMobile: boolean;
+  isMobile = this.platformService.isMobile();
 
   constructor(
-    platformService: PlatformService,
-    router: Router,
+   private platformService: PlatformService,
+   private router: Router,
   ) {
-
-    this.isMobile = platformService.isMobile();
-
-    if (this.isMobile) {
-      router.navigate(['/mobile/tabs/home']);
-    }
+    this.isMobile ? this.router.navigate(['/mobile/tabs/home']) : this.router.navigate(['/']);
   }
 }

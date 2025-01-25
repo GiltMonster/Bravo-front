@@ -1,0 +1,112 @@
+section {
+
+  .title {
+    h1 {
+      font-size: 3em;
+      font-weight: bold;
+      margin: 100px 0 20px;
+    }
+  }
+
+}
+
+ion-card {
+
+  .card-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    ion-label {
+      h1 {
+        font-size: 2em;
+      }
+
+      p {
+        font-size: 1.5em;
+        font-weight: bold;
+
+      }
+    }
+
+  }
+
+  .carro-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+}
+
+.list-produto {
+
+  ion-thumbnail {
+    --size: 70px;
+    --border-radius: 14px;
+  }
+
+  ion-label {
+    h1 {
+      font-size: 2em
+    }
+
+    p {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.card-mobile {
+  ion-card-header {
+
+    .card-info-header-mobile {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      ion-label {
+        h1 {
+          font-size: 1em;
+        }
+      }
+
+    }
+  }
+
+  ion-item {
+    display: flex;
+    align-items: center;
+
+    ion-note{
+      padding: 10px 0;
+    }
+
+  }
+}
+
+
+@media(prefers-color-scheme: dark) {
+  ion-card {
+    .card-info-header {
+      background-color: #282828;
+    }
+
+  }
+
+}
+
+@media(prefers-color-scheme: light) {
+  ion-card {
+    .card-info-header {
+      background-color: #F1F3F9;
+
+      ion-label {
+        color: #282828;
+      }
+
+    }
+  }
+
+}

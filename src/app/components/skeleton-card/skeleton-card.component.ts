@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonCard, IonSkeletonText, IonCardHeader, IonCardTitle, IonCardContent } from "@ionic/angular/standalone";
+import { PlatformService } from 'src/app/services/platform.service';
 
 @Component({
   selector: 'app-skeleton-card',
@@ -10,7 +11,11 @@ import { IonCard, IonSkeletonText, IonCardHeader, IonCardTitle, IonCardContent }
 })
 export class SkeletonCardComponent {
 
-  constructor() { }
+  isMobile = this.platformService.isMobile();
+
+  constructor(
+    private platformService: PlatformService,
+  ) { }
 
 
 }

@@ -1,0 +1,158 @@
+.endereco-salvo {
+  width: 90%;
+  height: auto;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 10px 30px;
+
+  .nome-cep {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .container-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    .logradouro-numero {
+      margin: 0;
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    .cidade-estado {
+      margin: 0 0 20px 0;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .container-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    ion-button {
+      width: 45%;
+    }
+  }
+
+  hr {
+    width: 100%;
+    height: 1px;
+    background: #606060;
+  }
+
+  p {
+    a {
+      font-weight: bold;
+    }
+  }
+}
+
+.form-edit{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  .container-buttons{
+    margin-top: 20px;
+  }
+}
+
+ion-card {
+  width: 85vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .nome-cep {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .container-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    .logradouro-numero {
+      margin: 0;
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    .cidade-estado {
+      margin: 0 0 20px 0;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .container-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+
+    ion-button{
+      width: 100%;
+    }
+  }
+
+  hr {
+    width: 100%;
+    height: 1px;
+    background: #606060;
+  }
+
+  p {
+    a {
+      font-weight: bold;
+    }
+  }
+
+
+}
+
+@media(prefers-color-scheme: light) {
+  .container-login {
+    --background: #F1F3F9;
+  }
+
+  h1 {
+    color: #3c3c3c;
+  }
+
+  ion-input {
+    --border-color: #606060;
+    --highlight-color-focused: #3c3c3c;
+    --highlight-color-invalid: #e02d3c;
+    --highlight-color-valid: #08875D;
+    --color: #000000;
+  }
+}
+
+ion-input {
+  --border-color: #606060;
+  --highlight-color-invalid: #e02d3c;
+  --highlight-color-valid: #08875D;
+  font-size: large;
+}

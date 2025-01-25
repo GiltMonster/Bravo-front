@@ -3,14 +3,26 @@
 
     <div class="header-content">
 
-      <a routerLink="/" routerLinkActive="router-link-active" >
+      <a (click)="home()">
         <img src="../../../assets/padrao.svg" alt="Logo do bravo" />
       </a>
 
       <div class="buttons-container">
-        <ion-button fill="outline" shape="round">Seu perfil</ion-button>
-        <ion-button fill="outline" shape="round">Carrinho</ion-button>
-        <ion-button fill="outline" shape="round">Logar</ion-button>
+        @if (userAuthenticated) {
+        <ion-button fill="outline" shape="round" (click)="perfil()">Seu perfil</ion-button>
+        <ion-button fill="outline" shape="round" (click)="carrinho()">
+          <ion-label>Carrinho</ion-label>
+          @if(itensLength > 0){
+            <ion-badge class="btn-badge">{{itensLength}}</ion-badge>
+          }
+        </ion-button>
+        }
+        @if (userAuthenticated) {
+        <ion-button fill="outline" shape="round" (click)="logout()">Sair</ion-button>
+        }@else {
+        <ion-button fill="outline" shape="round" (click)="login()">Logar</ion-button>
+        }
+
       </div>
     </div>
 

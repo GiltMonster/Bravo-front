@@ -1,0 +1,135 @@
+@if (isMobile) {
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cadastrar-se</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Cadastrar-se</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card class="container-cadastro-mobile" id="form-cadastro">
+    <ion-card-header>
+      <ion-card-title>Cadastre-se</ion-card-title>
+      <ion-card-subtitle>Bem vindo a Loja Bravo - Vamos começar criando uma conta?</ion-card-subtitle>
+    </ion-card-header>
+
+    <hr>
+
+    <ion-card-content class="form-mobile">
+
+      <form [formGroup]="createAccountForms">
+
+        <ion-input type="name" fill="solid" label="Nome" labelPlacement="floating" formControlName="name"
+          errorText="Campo obrigatorio">
+          <ion-icon slot="start" name="people" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+        <ion-input type="name" fill="solid" label="CPF" labelPlacement="floating" formControlName="cpf" maxlength="14"
+          errorText="Campo obrigatorio" (ionInput)="applyCpfMask($event)">
+          <ion-icon slot="start" name="id-card" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+        <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" helperText="Digite um email valido"
+          errorText="E-mail invalido" email formControlName="email">
+          <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+        <ion-input type="password" fill="solid" label="Senha" labelPlacement="floating" errorText="Digite uma senha"
+          formControlName="password" password>
+          <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+        </ion-input>
+
+
+        <div class="msg-pessword">
+          <ion-input type="password" fill="solid" label="Confirme sua senha" labelPlacement="floating"
+            errorText="Digite uma senha" formControlName="confirmPassword" password>
+            <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          @if(createAccountForms.errors?.['passwordsMismatch'] && createAccountForms.get('confirmPassword')?.touched){
+          <p>As senhas não coincidem!!!</p>
+          }
+        </div>
+
+        <ion-button fill="outline" shape="round" color="success" (click)="createAccount()" size="large" expand="full"
+          class="btn-mobile" [disabled]="!createAccountForms.valid || !isDisable">Cadastrar-se</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+    positionAnchor="form-cadastro" position="top" [color]="isError ? 'danger' : 'success'"
+    [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
+
+
+</ion-content>
+}@else {
+
+<ion-content>
+  <section class="container">
+    <ion-card class="container-cadastro">
+      <div class="container-img">
+        <img src="../../../assets/img/image.png" alt="">
+      </div>
+
+      <div class="form" id="form">
+        <ion-label>
+          <h1>Cadastre-se:</h1>
+          <p>Bem vindo a Loja Bravo - Vamos começar criando uma conta?</p>
+          <hr>
+        </ion-label>
+
+        <form [formGroup]="createAccountForms">
+
+          <ion-input type="name" fill="solid" label="Nome" labelPlacement="floating" name formControlName="name">
+            <ion-icon slot="start" name="people" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input type="name" fill="solid" label="CPF" labelPlacement="floating" formControlName="cpf" maxlength="14"
+            (ionInput)="applyCpfMask($event)">
+            <ion-icon slot="start" name="id-card" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input type="email" fill="solid" label="Email" labelPlacement="floating"
+            helperText="Digite um email valido" errorText="E-mail invalido" email formControlName="email">
+            <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input type="password" fill="solid" label="Senha" labelPlacement="floating" errorText="Digite uma senha"
+            formControlName="password" password>
+            <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <div class="msg-pessword">
+            <ion-input type="password" fill="solid" label="Confirme sua senha" labelPlacement="floating"
+              errorText="Digite uma senha" formControlName="confirmPassword" password>
+              <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+            </ion-input>
+
+            @if(createAccountForms.errors?.['passwordsMismatch'] && createAccountForms.get('confirmPassword')?.touched){
+            <p>As senhas não coincidem!!!</p>
+            }
+          </div>
+
+          <ion-button fill="outline" shape="round" color="success" (click)="createAccount()" size="large"
+            [disabled]="!createAccountForms.valid || !isDisable">Cadastrar-se</ion-button>
+
+          <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
+            positionAnchor="form" position="top" [color]="isError ? 'danger' : 'success'"
+            [icon]="isError ? 'close-circle' : 'save'"></ion-toast>
+
+
+        </form>
+      </div>
+    </ion-card>
+  </section>
+</ion-content>
+
+
+}

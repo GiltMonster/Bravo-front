@@ -1,0 +1,99 @@
+@if (isMobile) {
+<ion-card class="endereco-salvo-mobile">
+  @if(!editMode){
+  <ion-card-content>
+    <div class="nome-cep">
+      <h2>{{endereco.nome}}</h2>
+      <h2>{{endereco.cep | formatCEP}}</h2>
+    </div>
+    <hr>
+    <div class="container-info">
+      <p class="logradouro-numero">{{endereco.logradouro}}, <span>{{endereco.numero}}</span></p>
+      <p class="cidade-estado">{{endereco.cidade}}, <span>{{endereco.estado}}</span></p>
+    </div>
+    <p>{{endereco.complemento}}</p>
+    <div class="container-buttons">
+      <ion-button fill="outline" shape="round" color="success" (click)="toggleEditMode()">Editar</ion-button>
+      <ion-button fill="outline" shape="round" color="primary"
+        (click)="deleteEnderecoById(endereco.id!)">Excluir</ion-button>
+    </div>
+  </ion-card-content>
+
+  }@else{
+  <ion-card-content>
+    <form [formGroup]="enderecoForm">
+      <ion-input formControlName="nome" fill="solid" label="Nome" labelPlacement="floating" placeholder="Nome"
+        helperText="Digite um nome valido" errorText="Nome invalido"></ion-input>
+      <ion-input formControlName="cep" fill="solid" label="CEP" labelPlacement="floating" placeholder="CEP"
+        helperText="Digite um CEP valido" errorText="CEP invalido" maxlength="9"></ion-input>
+      <ion-input formControlName="logradouro" fill="solid" label="Logradouro" labelPlacement="floating"
+        placeholder="Logradouro" helperText="Digite um logradouro valido" errorText="Logradouro invalido"></ion-input>
+      <ion-input formControlName="numero" fill="solid" label="Numero" labelPlacement="floating" placeholder="Número"
+        helperText="Digite um numero valido" errorText="Numero invalido"></ion-input>
+      <ion-input formControlName="cidade" fill="solid" label="Cidade" labelPlacement="floating" placeholder="Cidade"
+        helperText="Digite uma cidade valida" errorText="Cidade invalida"></ion-input>
+      <ion-input formControlName="estado" fill="solid" label="Estado" labelPlacement="floating" placeholder="Estado"
+        helperText="Digite um estado valido" errorText="Estado invalido"></ion-input>
+      <ion-input formControlName="complemento" fill="solid" label="Complemento" labelPlacement="floating"
+        placeholder="Complemento" helperText="Digite um complemento valido"
+        errorText="Complemento invalido"></ion-input>
+    </form>
+    <div class="container-buttons">
+      <ion-button fill="outline" shape="round" color="success" (click)="saveEndereco()">Salvar</ion-button>
+      <ion-button fill="outline" shape="round" color="primary" (click)="cancelEdit()">Cancelar</ion-button>
+    </div>
+  </ion-card-content>
+  }
+</ion-card>
+}
+@else {
+<ion-card class="endereco-salvo">
+  @if(!editMode){
+  <div>
+    <div class="nome-cep">
+      <h2>{{endereco.nome}}</h2>
+      <h2>{{endereco.cep | formatCEP}}</h2>
+    </div>
+    <hr>
+    <div class="container-info">
+      <p class="logradouro-numero">{{endereco.logradouro}}, <span>{{endereco.numero}}</span></p>
+      <p class="cidade-estado">{{endereco.cidade}}, <span>{{endereco.estado}}</span></p>
+    </div>
+    <p>{{endereco.complemento}}</p>
+    <div class="container-buttons">
+      <ion-button fill="outline" shape="round" color="success" size="large"
+        (click)="toggleEditMode()">Editar</ion-button>
+      <ion-button fill="outline" shape="round" color="primary" size="large"
+        (click)="deleteEnderecoById(endereco.id!)">Excluir</ion-button>
+    </div>
+  </div>
+
+  }@else{
+  <div>
+    <form [formGroup]="enderecoForm" class="form-edit">
+      <ion-input formControlName="nome" fill="solid" label="Nome" labelPlacement="floating" placeholder="Nome"
+        helperText="Digite um nome valido" errorText="Nome invalido"></ion-input>
+      <ion-input formControlName="cep" fill="solid" label="CEP" labelPlacement="floating" placeholder="CEP"
+        helperText="Digite um CEP valido" errorText="CEP invalido" maxlength="9"></ion-input>
+      <ion-input formControlName="logradouro" fill="solid" label="Logradouro" labelPlacement="floating"
+        placeholder="Logradouro" helperText="Digite um logradouro valido" errorText="Logradouro invalido"></ion-input>
+      <ion-input formControlName="numero" fill="solid" label="Numero" labelPlacement="floating" placeholder="Número"
+        helperText="Digite um numero valido" errorText="Numero invalido"></ion-input>
+      <ion-input formControlName="cidade" fill="solid" label="Cidade" labelPlacement="floating" placeholder="Cidade"
+        helperText="Digite uma cidade valida" errorText="Cidade invalida"></ion-input>
+      <ion-input formControlName="estado" fill="solid" label="Estado" labelPlacement="floating" placeholder="Estado"
+        helperText="Digite um estado valido" errorText="Estado invalido"></ion-input>
+      <ion-input formControlName="complemento" fill="solid" label="Complemento" labelPlacement="floating"
+        placeholder="Complemento" helperText="Digite um complemento valido"
+        errorText="Complemento invalido"></ion-input>
+      <div class="container-buttons">
+        <ion-button fill="outline" shape="round" color="success" size="large"
+          (click)="saveEndereco()">Salvar</ion-button>
+        <ion-button fill="outline" shape="round" color="primary" size="large"
+          (click)="cancelEdit()">Cancelar</ion-button>
+      </div>
+    </form>
+  </div>
+  }
+</ion-card>
+}

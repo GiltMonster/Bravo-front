@@ -1,5 +1,10 @@
 @import "../../../global.scss";
 
+.mobile-title{
+  font-size: 2em;
+  margin-top: 0;
+}
+
 .cards-list-mobile {
   scroll-snap-type: x mandatory;
   scroll-padding: 50%;
@@ -14,6 +19,7 @@
     max-height: fit-content;
     scroll-snap-align: center;
     transition: 0.5s;
+
 
     ion-card-header {
       ion-card-title {
@@ -90,11 +96,16 @@ div[scrollX=true] {
 }
 
 .skeleton-title{
-  width: 20%;
-  height: 2.5rem;
+  width: 60%;
+  height: 2rem;
 }
 
 .imgCard {
   width: 100%;
   height: 275px;
+}
+
+.iconCard-mobile {
+  width: 100%;
+  height: 200px;
 }

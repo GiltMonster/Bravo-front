@@ -1,0 +1,122 @@
+section {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+
+  .container-infos {
+    width: 100%;
+    height: auto;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F1F3F9;
+
+    .textos-perfil {
+
+      h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-top: 0;
+      }
+
+      p {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+      }
+    }
+
+    ion-button {
+      height: 20%;
+    }
+
+  }
+
+  .container-btns {
+    background-color: #F1F3F9;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px;
+    gap: 20px;
+  }
+
+  ion-card {
+    width: 100%;
+    min-height: 700px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    .card-content-background {
+      background-color: #E1E6EF;
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    ion-card-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    ion-card-content {
+      font-size: 1.5rem;
+    }
+
+  }
+
+  ion-card:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+}
+
+ion-card-title {
+  display: flex;
+  gap: 10px;
+}
+
+@media(prefers-color-scheme: dark) {
+  section {
+    .container-infos {
+      background-color: #1A1A1A;
+    }
+
+    .container-btns {
+      background-color: #1A1A1A;
+    }
+
+    img {
+      filter: invert(1);
+    }
+
+    ion-card {
+      .card-content-background {
+        background-color: #1A1A1A;
+      }
+    }
+
+  }
+
+  ion-card:hover {
+    box-shadow: rgba(126, 126, 138, 0.2) 0px 7px 29px 0px;
+  }
+
+}
