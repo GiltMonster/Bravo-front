@@ -79,7 +79,7 @@ export class LoginPage implements OnInit {
   }
 
   goToRegister() {
-    this.router.navigate(['mobile/tabs/page/register']);
+    this.isMobile ? this.router.navigate(['mobile/tabs/page/register']) : this.router.navigate(['/register']);
   }
 
 }

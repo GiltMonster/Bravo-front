@@ -80,7 +80,7 @@
             [disabled]="!loginForms.valid || !isDisable">Logar-se</ion-button>
 
           <ion-label>
-            <p>Não tem uma conta? <a href="/register">Cadastre-se</a></p>
+            <p>Não tem uma conta? <a (click)="goToRegister()">Cadastre-se</a></p>
           </ion-label>
 
           <ion-toast [isOpen]="isToastOpen" [message]="msg.message" [duration]="5000" (didDismiss)="setOpen(false)"
