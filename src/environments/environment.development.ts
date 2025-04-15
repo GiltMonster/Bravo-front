@@ -1,7 +1,7 @@
-const END_POINT = 'http://localhost:8000';
+const END_POINT = 'https://bravo-backend-production-b096.up.railway.app';
 
 export const environment = {
-  production: false,
+  production: true,
   BASE_API_URL: `${END_POINT}/api/`,
   API_URL_PRODUCTS: `${END_POINT}/api/produto`,
   API_URL_SEARCH_PRODUCTS: `${END_POINT}/api/search`,
